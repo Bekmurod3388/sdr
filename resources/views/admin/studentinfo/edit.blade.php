@@ -25,11 +25,6 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="header_ru">ID</label>
-                            <input type="text" name="id" class="form-control" id="header_ru" placeholder="Титул" value="{{$post->id}}">
-                        </div>
-
-                        <div class="form-group">
                             <label for="description_ru">Fakultet</label>
                             <input type="text" name="name" class="form-control" id="header_ru" placeholder="Титул" value="{{$post->name}}">
                         </div>
