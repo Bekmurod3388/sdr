@@ -77,10 +77,10 @@ class StudentInfoController extends Controller
      * @param  \App\Models\StudentInfo  $studentinfo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StudentInfo $studentinfo,$id)
+    public function update(Request $request,$id)
     {
         $post=Fakultet::find($id);
-        $post->id=$request->id;
+        $post->id=$id;
         $post->name=$request->name;
         $post->save();
 
