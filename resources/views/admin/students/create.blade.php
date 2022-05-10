@@ -59,9 +59,9 @@
                         <div class="form-group">
                             <select class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
                                 <option selected>Xonani tanlang</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                @foreach($rooms as $room)
+                                <option value="{{$room->id}}">{{$room->room_number}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
