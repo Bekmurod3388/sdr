@@ -14,8 +14,9 @@ class StudentController
         return view('admin.students.index',["posts"=>$post]);
     }
     public function create(){
-        $rooms=Room::all()->where('busy','<','count');
+        $rooms=Room::whereColumn('busy','<','count')->get();
         $fak=Fakultet::all();
+        dd($rooms);
         return view('admin.students.create',[
             "rooms"=>$rooms,
             "fakultets"=>$fak
