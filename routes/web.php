@@ -29,6 +29,9 @@ Auth::routes([
 Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('students', App\Http\Controllers\StudentController::class);
+    Route::resource('rooms', App\Http\Controllers\RoomController::class);
+    Route::resource('student_info', App\Http\Controllers\StudentInfoController::class);
 
 });
 
