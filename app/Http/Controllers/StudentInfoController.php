@@ -62,9 +62,12 @@ class StudentInfoController extends Controller
      * @param  \App\Models\StudentInfo  $studentinfo
      * @return \Illuminate\Http\Response
      */
-    public function edit(StudentInfo $studentinfo)
+    public function edit(StudentInfo $studentinfo,$id)
     {
-        //
+     $post=Fakultet::find($id);
+     return view('admin.studentinfo.edit',[
+         'post'=>$post
+     ]);
     }
 
     /**
@@ -74,9 +77,17 @@ class StudentInfoController extends Controller
      * @param  \App\Models\StudentInfo  $studentinfo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StudentInfo $studentinfo)
+    public function update(Request $request, StudentInfo $studentinfo,$id)
     {
-        //
+        $post=Fakultet::find($id);
+        $post->id=$request->id;
+        $post->name=$request->name;
+        $post->save();
+
+        $posts=Fakultet::all();
+        return view('admin.studentinfo.index',[
+            'posts'=>$posts
+        ]);
     }
 
     /**
@@ -85,8 +96,10 @@ class StudentInfoController extends Controller
      * @param  \App\Models\StudentInfo  $studentinfo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StudentInfo $studentinfo)
+    public function destroy(StudentInfo $studentinfo,$id)
     {
-        //
+        $data=Fakultet::find($id);
+        $data->delete();
+        return redirect(route('admin.student_info.index'));
     }
 }
