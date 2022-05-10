@@ -21,21 +21,18 @@
                     @endif
 
 
-                    <form action="{{route('admin.student_info.update',$post)}}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                    <form action="{{route('admin.student_info.update',$post->id)}}" method="POST" name="id" accept-charset="UTF-8" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="header_ru">ID</label>
-                            <input type="text" name="id" class="form-control" id="header_ru" placeholder="Титул" value="{{$post->id}}">
-                        </div>
-
-                        <div class="form-group">
                             <label for="description_ru">Fakultet</label>
-                            <input type="text" name="name" class="form-control" id="header_ru" placeholder="Титул" value="{{$post->name}}">
+                            <input type="text" name="name" class="form-control" id="header_ru" placeholder="Fakultet" value="{{$post->name}}">
                         </div>
                         <button type="submit" class="btn btn-primary">Saqlash</button>
-                        <input type="reset" class="btn btn-danger" value="Очистить">
+                        <input type="reset" class="btn btn-danger" value="Tozalash">
                     </form>
+
+
                 </div>
             </div>
         </div>

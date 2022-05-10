@@ -29,10 +29,10 @@ class RoomController extends Controller
         $data = new Room();
         $data->room_number = $request->number;
         $data->count = $request->count;
+        $data->floor = $request->floor;
         $data->save();
 
-        $data = Room::all();
-        return view('admin.rooms.room',compact('data'));
+        return redirect(route('admin.rooms.index'));
 
     }
 
@@ -50,13 +50,12 @@ class RoomController extends Controller
     {
 
         $data = Room::find($id);
-
         $data->room_number = $request->number;
         $data->count = $request->count;
+        $data->floor = $request->floor;
         $data->save();
 
-        $data = Room::all();
-        return view('admin.rooms.room',compact('data'));
+        return redirect(route('admin.rooms.index'));
 
     }
 
@@ -66,8 +65,7 @@ class RoomController extends Controller
         $data = Room::find($id);
         $data->delete();
 
-        $data = Room::all();
-        return view('admin.rooms.room',compact('data'));
+        return redirect(route('admin.rooms.index'));
 
     }
 }
