@@ -22,6 +22,7 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Xona raqami</th>
+                            <th scope="col">Qavat raqami</th>
                             <th scope="col">Joylar soni</th>
                             <th scope="col">Ammallar</th>
 
@@ -33,6 +34,7 @@
                             <tr>
                                 <th scope="row" class="col-1">{{$post->id}}</th>
                                 <td>{{$post->room_number}}</td>
+                                <td>{{$post->floor}}</td>
                                 <td>{{$post->count}}</td>
 
                                 <td class="col-2">
