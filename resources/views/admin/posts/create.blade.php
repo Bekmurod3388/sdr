@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-10"><h1 class="card-title">Добавить новости</h1></div>
+                        <div class="col-10"><h1 class="card-title">Yangilik qo'shing</h1></div>
                 </div>
                 <hr>
                 <div class="card-body">
@@ -25,21 +25,21 @@
                           enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="header_ru">Титу</label>
+                            <label for="header_ru">Sarlavha</label>
                             <input type="text" name="header_ru" class="form-control" id="header_ru" placeholder="Титул">
                         </div>
 
                         <div class="form-group">
-                            <label for="description">Текст</label>
+                            <label for="description">Matn</label>
                             <textarea class="form-control" name="description_ru" id="description" rows="10"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="img">Добавьте рисунок </label>
+                            <label for="img">Rasm qo'shish</label>
                             <input type="file" name="img" class="form-control" id="img">
                         </div>
 
-                        <button type="submit" id="alert" class="btn btn-primary">Сохранить</button>
+                        <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Очистить">
                     </form>
                 </div>

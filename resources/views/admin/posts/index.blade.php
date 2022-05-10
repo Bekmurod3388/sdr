@@ -5,13 +5,13 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-9"><h1 class="card-title">Новости</h1></div>
+                    <div class="col-9"><h1 class="card-title">Yangiliklar</h1></div>
                     <div class="col-md-1">
                         <a class="btn btn-primary" href="{{route('admin.posts.create')}}">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
-                            Добавить новости
+                            Yangilik qo'shing
                         </a>
                     </div>
                 </div>
@@ -21,11 +21,11 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Титул</th>
-                            <th scope="col">Текст</th>
-                            <th scope="col">Время</th>
-                            <th scope="col">Просмотрено</th>
-                            <th scope="col">Действие</th>
+                            <th scope="col">Sarlavha</th>
+                            <th scope="col">Matn</th>
+                            <th scope="col">Vaqt</th>
+                            <th scope="col">Ko'rildi</th>
+                            <th scope="col">Harakat</th>
                         </tr>
                         </thead>
                         <tbody>
