@@ -50,7 +50,6 @@ class RoomController extends Controller
     {
 
         $data = Room::find($id);
-
         $data->room_number = $request->number;
         $data->count = $request->count;
         $data->save();
