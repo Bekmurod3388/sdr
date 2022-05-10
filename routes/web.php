@@ -32,6 +32,7 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(funct
     Route::resource('students', App\Http\Controllers\StudentController::class);
     Route::resource('rooms', App\Http\Controllers\RoomController::class);
     Route::resource('student_info', App\Http\Controllers\StudentInfoController::class);
-
+    Route::get('/attendances/create', [\App\Http\Controllers\AttendanceController::class, 'create'])->name('attendance.create');
+    Route::post('/attendance', [\App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store');
 });
 
