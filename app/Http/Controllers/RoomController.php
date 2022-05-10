@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $data = Room::all();
 
         return view('admin.rooms.room',compact('data'));
     }
+
 
     public function create(){
 
@@ -20,9 +22,34 @@ class RoomController extends Controller
 
     }
 
+
     public function store(Request $request)
     {
+
         $data = new Room();
+        $data->room_number = $request->number;
+        $data->count = $request->count;
+        $data->save();
+
+        $data = Room::all();
+        return view('admin.rooms.room',compact('data'));
+
+    }
+
+
+    public function edit($id)
+    {
+
+        $data = Room::find($id);
+        return view('admin.rooms.edit',compact('data'));
+
+    }
+
+
+    public function update(Request $request, $id)
+    {
+
+        $data = Room::find($id);
 
         $data->room_number = $request->number;
         $data->count = $request->count;
@@ -33,7 +60,8 @@ class RoomController extends Controller
 
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
 
         $data = Room::find($id);
         $data->delete();

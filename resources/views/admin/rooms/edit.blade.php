@@ -20,27 +20,24 @@
                         </div>
                     @endif
 
-
-                    <form action="{{route('admin.posts.update',$post)}}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                    <form action="{{route('admin.rooms.update',$data->id)}}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
                             <label for="header_ru">Xona raqami</label>
-                            <input type="text" name="header_ru" class="form-control" id="header_ru" placeholder="Титул" value="{{$post->room_number}}">
+                            <input type="text" name="number" class="form-control" id="header_ru" placeholder="Титул" value="{{$data->room_number}}">
                         </div>
 
                         <div class="form-group">
-                            <label for="description_ru">Matn</label>
-                            <textarea  class="form-control"  name="description_ru" id="description_ru" rows="10">{{$post->description_ru}}</textarea>
+                            <label for="description_ru">O`rinlar soni</label>
+                            <input type="number" name="count" class="form-control" id="header_ru" placeholder="Титул" value="{{$data->count}}">
                         </div>
 
-                        <div class="form-group">
-                            <label for="img">Rasm <b><i>РАЗМЕР РИСУНОК:(600x300)</i></b></label>
-                            <input type="file" name="img" class="form-control" id="img">
-                        </div>
                         <button type="submit" class="btn btn-primary">Saqlash</button>
-                        <input type="reset" class="btn btn-danger" value="Очистить">
+                        <input type="reset" class="btn btn-danger" value="Tozalash">
+
                     </form>
+
                 </div>
             </div>
         </div>
