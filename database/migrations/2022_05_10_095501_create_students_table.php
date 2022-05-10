@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('parent_name');
             $table->string('parent_phone');
             $table->integer('room_id')->default(0);
+            $table->integer('fak_id')->default(0);
             $table->timestamps();
         });
     }

@@ -21,7 +21,7 @@
                     @endif
 
 
-                    <form action="" method="POST" accept-charset="UTF-8"
+                    <form action="{{route('admin.students.store')}}" method="POST" accept-charset="UTF-8"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
@@ -57,18 +57,19 @@
                             <input type="text" name="parent_phone" class="form-control" id="header_ru" placeholder="+998883621700">
                         </div>
                         <div class="form-group">
-                            <select class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option selected>Xonani tanlang</option>
+                            <select name="room_id" class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <option value="0" selected>Xonani tanlang</option>
                                 @foreach($rooms as $room)
                                 <option value="{{$room->id}}">{{$room->room_number}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <select class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option selected>Fakultetni tanlang</option>
-                                <option value="1">Telekomunikatsiya texnologiyalari</option>
-                                <option value="2">Kompyuter injinering</option>
+                            <select name="fak_id" class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <option   value="0" selected>Fakultetni tanlang</option>
+                                @foreach($fakultets as $fak)
+                                <option value="{{$fak->id}}">{{$fak->name}}</option>
+                                @endforeach
 
                             </select>
                         </div>
