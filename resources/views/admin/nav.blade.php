@@ -26,7 +26,7 @@
                             <div class="dropdown-divider"></div>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-primary">Выход</button>
+                                <button type="submit" class="btn btn-primary">Chiqish</button>
                             </form>
                         </li>
                     </div>
