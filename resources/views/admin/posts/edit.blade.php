@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-10"><h1 class="card-title">Обновлять новости</h1></div>
+                    <div class="col-10"><h1 class="card-title">Yangiliklarni yangilash</h1></div>
                 </div>
                 <hr>
                 <div class="card-body">
@@ -25,20 +25,20 @@
                         @csrf
                         @method('PUT')
                     <div class="form-group">
-                        <label for="header_ru">Титул(Ру)</label>
+                        <label for="header_ru">Sarlavha</label>
                         <input type="text" name="header_ru" class="form-control" id="header_ru" placeholder="Титул" value="{{$post->header_ru}}">
                     </div>
 
                     <div class="form-group">
-                        <label for="description_ru">Текст (Ру)</label>
+                        <label for="description_ru">Matn</label>
                         <textarea  class="form-control"  name="description_ru" id="description_ru" rows="10">{{$post->description_ru}}</textarea>
                     </div>
 
                         <div class="form-group">
-                            <label for="img">Добавьте рисунок <b><i>РАЗМЕР РИСУНОК:(600x300)</i></b></label>
+                            <label for="img">Rasm <b><i>РАЗМЕР РИСУНОК:(600x300)</i></b></label>
                         <input type="file" name="img" class="form-control" id="img">
                     </div>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary">Saqlash</button>
                     <input type="reset" class="btn btn-danger" value="Очистить">
                     </form>
                 </div>
