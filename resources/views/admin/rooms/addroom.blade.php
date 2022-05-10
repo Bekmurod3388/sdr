@@ -27,13 +27,18 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="header_ru">Xona raqami</label>
-                            <input type="text" name="number" class="form-control"  placeholder="Xona raqamini kiriting">
+                            <label for="header_ru"> Xona raqami </label>
+                            <input type="text" name="number" class="form-control"  placeholder="000-A">
                         </div>
 
                         <div class="form-group">
-                            <label for="header_ru">Joylar soni </label>
-                            <input type="number" name="count" class="form-control">
+                            <label for="header_ru"> O`rinlar soni </label>
+                            <input type="number" name="count" class="form-control" placeholder="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="header_ru"> Qavat raqami </label>
+                            <input type="number" name="floor" class="form-control" placeholder="0">
                         </div>
 
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
