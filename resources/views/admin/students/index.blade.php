@@ -20,38 +20,44 @@
                         <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Sarlavha</th>
-                            <th scope="col">Matn</th>
-                            <th scope="col">Vaqt</th>
+                            <th scope="col">Ism</th>
+                            <th scope="col">Familya</th>
+                            <th scope="col">Telefon raqam</th>
 
                             <th scope="col">Harakat</th>
                         </tr>
                         </thead>
                         <tbody>
-{{--                        @foreach($posts as $post)--}}
-{{--                            <tr>--}}
-{{--                                <th scope="row" class="col-1">{{$post->id}}</th>--}}
-{{--                                <td>{{$post->header_ru}}</td>--}}
-{{--                                <td>{{$post->description_ru}}</td>--}}
-{{--                                <td>{{$post->created_at}}</td>--}}
-{{--                                <td>{{$post->viewed}}</td>--}}
-{{--                                <td class="col-2">--}}
-{{--                                    <form action="" method="POST">--}}
-{{--                                        <a class="btn btn-warning btn-sm" href="">--}}
-{{--                                    <span class="btn-label">--}}
-{{--                                        <i class="fa fa-pen"></i>--}}
-{{--                                    </span>--}}
+                        @foreach($posts as $post)
+                            <tr>
+                                <th scope="row" class="col-1">{{$post->id}}</th>
+                                <td>{{$post->name}}</td>
+                                <td>{{$post->surname}}</td>
+                                <td>{{$post->phone}}</td>
 
-{{--                                        </a>--}}
-{{--                                        @csrf--}}
-{{--                                        @method('DELETE')--}}
-{{--                                        <button type="submit" class="btn btn-danger btn-sm"><span class="btn-label">--}}
-{{--                                        <i class="fa fa-trash"></i>--}}
-{{--                                    </span></button>--}}
-{{--                                    </form>--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
+                                <td class="col-2">
+                                    <form action="" method="POST">
+                                        <a class="btn btn-primary btn-sm" href="">
+                                    <span class="btn-label">
+                                        <i class="fa fa-eye"></i>
+                                    </span>
+
+                                        </a>
+                                        <a class="btn btn-warning btn-sm" href="">
+                                    <span class="btn-label">
+                                        <i class="fa fa-pen"></i>
+                                    </span>
+
+                                        </a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm"><span class="btn-label">
+                                        <i class="fa fa-trash"></i>
+                                    </span></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
 <tr>
     <th scope="row" class="col-1">id</th>
     <td>Birnars</td>
