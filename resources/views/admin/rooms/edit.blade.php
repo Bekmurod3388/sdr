@@ -25,12 +25,17 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="header_ru">Xona raqami</label>
-                            <input type="text" name="number" class="form-control" id="header_ru" placeholder="Титул" value="{{$data->room_number}}">
+                            <input type="text" name="number" class="form-control" id="header_ru" placeholder="000-A" value="{{$data->room_number}}">
                         </div>
 
                         <div class="form-group">
                             <label for="description_ru">O`rinlar soni</label>
-                            <input type="number" name="count" class="form-control" id="header_ru" placeholder="Титул" value="{{$data->count}}">
+                            <input type="number" name="count" class="form-control" id="header_ru" placeholder="0" value="{{$data->count}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description_ru">Qavat raqami</label>
+                            <input type="number" name="floor" class="form-control" id="header_ru" placeholder="0" value="{{$data->floor}}">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Saqlash</button>
