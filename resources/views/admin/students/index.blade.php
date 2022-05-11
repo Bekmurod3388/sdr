@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-9"><h1 class="card-title">Yangiliklar</h1></div>
+                    <div class="col-9"><h1 class="card-title">Talabalar</h1></div>
                     <div class="col-md-1">
                         <a class="btn btn-primary" href="{{route('admin.students.create')}}">
                             <span class="btn-label">
@@ -16,34 +16,34 @@
                 </div>
                 <hr>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered text-center">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Ism</th>
-                            <th scope="col">Familya</th>
-                            <th scope="col">Telefon raqam</th>
+                            <th class="" scope="col">#</th>
+                            <th class="" scope="col">Ism</th>
+                            <th class="" scope="col">Familya</th>
+                            <th  class="w-25" scope="col">Telefon raqam</th>
 
-                            <th scope="col">Harakat</th>
+                            <th class="w-25" scope="col">Amallar</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($posts as $post)
+                        @foreach($posts as $ind=>$post)
                             <tr>
-                                <th scope="row" class="col-1">{{$post->id}}</th>
+                                <th scope="row" class="col-1">{{($posts->currentpage()-1)*($posts->perpage())+$ind+1}}</th>
                                 <td>{{$post->name}}</td>
                                 <td>{{$post->surname}}</td>
                                 <td>{{$post->phone}}</td>
 
                                 <td class="col-2">
-                                    <form action="" method="POST">
-                                        <a class="btn btn-primary btn-sm" href="">
+                                    <form action="{{route('admin.students.destroy',$post->id)}}" method="POST">
+                                        <a title="Ko'rish" class="btn btn-primary btn-sm active" href="{{route('admin.students.show',$post->id)}}">
                                     <span class="btn-label">
                                         <i class="fa fa-eye"></i>
                                     </span>
 
                                         </a>
-                                        <a class="btn btn-warning btn-sm" href="">
+                                        <a title="Tahrirlash" class="btn btn-warning btn-sm active" href="{{route('admin.students.edit',$post->id)}}">
                                     <span class="btn-label">
                                         <i class="fa fa-pen"></i>
                                     </span>
@@ -51,44 +51,29 @@
                                         </a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"><span class="btn-label">
+                                        <button title="O'chirish" type="submit" class="btn btn-danger active btn-sm"><span class="btn-label">
                                         <i class="fa fa-trash"></i>
                                     </span></button>
                                     </form>
                                 </td>
                             </tr>
                         @endforeach
-<tr>
-    <th scope="row" class="col-1">id</th>
-    <td>Birnars</td>
-    <td>Yana</td>
-    <td>Nimadir</td>
 
-    <td class="col-2">
-        <form action="" method="POST">
-            <a class="btn btn-primary btn-sm" href="">
-                                    <span class="btn-label">
-                                        <i class="fa fa-eye"></i>
-                                    </span>
-
-            </a>
-
-            <a class="btn btn-warning btn-sm" href="">
-                                    <span class="btn-label">
-                                        <i class="fa fa-pen"></i>
-                                    </span>
-
-            </a>
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-sm"><span class="btn-label">
-                                        <i class="fa fa-trash"></i>
-                                    </span></button>
-        </form>
-    </td>
-</tr>
                         </tbody>
                     </table>
+                    <div class="container">
+                        <div class="row justify-content-center">
+
+
+                            @if ($posts->links())
+                                <div class="mt-4 p-4 box has-text-centered">
+                                    {{ $posts->links() }}
+                                </div>
+                            @endif
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
