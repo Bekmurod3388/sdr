@@ -16,7 +16,7 @@
                 </div>
                 <hr>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered text-center">
                         <thead>
                         <tr>
                             <th class="" scope="col">#</th>
@@ -24,7 +24,7 @@
                             <th class="" scope="col">Familya</th>
                             <th  class="w-25" scope="col">Telefon raqam</th>
 
-                            <th class="w-25" scope="col">Harakat</th>
+                            <th class="w-25" scope="col">Amallar</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -37,13 +37,13 @@
 
                                 <td class="col-2">
                                     <form action="{{route('admin.students.destroy',$post->id)}}" method="POST">
-                                        <a class="btn btn-primary btn-sm" href="{{route('admin.students.show',$post->id)}}">
+                                        <a title="Ko'rish" class="btn btn-primary btn-sm active" href="{{route('admin.students.show',$post->id)}}">
                                     <span class="btn-label">
                                         <i class="fa fa-eye"></i>
                                     </span>
 
                                         </a>
-                                        <a class="btn btn-warning btn-sm" href="{{route('admin.students.edit',$post->id)}}">
+                                        <a title="Tahrirlash" class="btn btn-warning btn-sm active" href="{{route('admin.students.edit',$post->id)}}">
                                     <span class="btn-label">
                                         <i class="fa fa-pen"></i>
                                     </span>
@@ -51,15 +51,29 @@
                                         </a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"><span class="btn-label">
+                                        <button title="O'chirish" type="submit" class="btn btn-danger active btn-sm"><span class="btn-label">
                                         <i class="fa fa-trash"></i>
                                     </span></button>
                                     </form>
                                 </td>
                             </tr>
                         @endforeach
+
                         </tbody>
                     </table>
+                    <div class="container">
+                        <div class="row justify-content-center">
+
+
+                            @if ($posts->links())
+                                <div class="mt-4 p-4 box has-text-centered">
+                                    {{ $posts->links() }}
+                                </div>
+                            @endif
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
