@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class StudentController
 {
     public function index(){
-    $post=Student::all();
+    $post=Student::paginate(2);
         return view('admin.students.index',["posts"=>$post]);
     }
     public function create(){
