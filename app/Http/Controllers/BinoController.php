@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BinoRequest;
 use App\Models\Floor;
 use App\Models\Room;
 use App\Models\Bino;
@@ -9,6 +10,13 @@ use Illuminate\Http\Request;
 
 class BinoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
 
@@ -26,7 +34,7 @@ class BinoController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(BinoRequest $request)
     {
 
         $data = new Bino();

@@ -9,9 +9,6 @@ use Illuminate\Http\Request;
 class FloorController extends Controller
 {
 
-    public function __construct(){
-        $this->middleware('auth');
-    }
 
     public function index()
     {
@@ -26,7 +23,6 @@ class FloorController extends Controller
         return view('admin.floors.addfloor');
 
     }
-
 
     public function store(FloorRequest $request)
     {
