@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Fakultet;
 use App\Models\Room;
 use App\Models\Student;
+use App\Rules\PassportNumber;
+use App\Rules\PhoneNumber;
 use Illuminate\Http\Request;
 
 class StudentController
@@ -28,20 +30,33 @@ class StudentController
 
     public function store(Request $request)
     {
+        $request=$request->validate([
+            "name"=>'required ',
+            "surname"=>'required ',
+            "f_s_name"=>'required ',
+            "address"=>'required ',
+            "phone"=>['required',new PhoneNumber],
+            "passport"=>['required',new PassportNumber],
+            "parent_name"=>'required ',
+            "parent_phone"=>['required',new PhoneNumber],
+            "room_id"=>'required',
+            "fak_id"=>'required'
+        ]);
+
         $data = new Student();
-        $data->name = $request->name;
-        $data->surname = $request->surname;
-        $data->f_s_name = $request->f_s_name;
-        $data->address = $request->address;
-        $data->phone = $request->phone;
-        $data->passport = $request->passport;
-        $data->parent_name = $request->parent_name;
-        $data->parent_phone = $request->parent_phone;
-        $data->room_id = $request->room_id;
-        $data->fak_id = $request->fak_id;
+        $data->name = $request['name'];
+        $data->surname = $request['surname'];
+        $data->f_s_name = $request['f_s_name'];
+        $data->address = $request['address'];
+        $data->phone = $request['phone'];
+        $data->passport = $request['passport'];
+        $data->parent_name = $request['parent_name'];
+        $data->parent_phone = $request['parent_phone'];
+        $data->room_id = $request['room_id'];
+        $data->fak_id = $request['fak_id'];
         $data->save();
         //busy++
-        $id = $request->room_id;
+        $id = $request['room_id'];
         $d = Room::find($id);
         $d->busy += 1;
         $d->save();
