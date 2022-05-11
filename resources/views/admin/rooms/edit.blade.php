@@ -33,10 +33,16 @@
                             <input type="number" name="count" class="form-control" id="header_ru" placeholder="0" value="{{$data->count}}">
                         </div>
 
+
                         <div class="form-group">
-                            <label for="description_ru">Qavat raqami</label>
-                            <input type="number" name="floor" class="form-control" id="header_ru" placeholder="0" value="{{$data->floor}}">
+                            <select name="floor_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <option value="0" selected> {{ $isfloor->floor }} </option>
+                                @foreach($floors as $floor)
+                                    <option value="{{$floor->id}}">{{$floor->floor}}</option>
+                                @endforeach
+                            </select>
                         </div>
+
 
                         <button type="submit" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">

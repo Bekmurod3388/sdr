@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Floor;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -11,14 +12,20 @@ class RoomController extends Controller
     {
 
         $data = Room::orderBy('room_number', 'ASC')->paginate(5);
+        $floors = Floor::all();
 
-        return view('admin.rooms.room',compact('data'));
+        return view('admin.rooms.room',[
+            'data'=>$data,
+            'floors'=>$floors
+        ]);
+
     }
 
 
     public function create(){
 
-        return view('admin.rooms.addroom');
+        $floors = Floor::all();
+        return view('admin.rooms.addroom',compact('floors'));
 
     }
 
@@ -29,7 +36,7 @@ class RoomController extends Controller
         $data = new Room();
         $data->room_number = $request->number;
         $data->count = $request->count;
-        $data->floor = $request->number[0];
+        $data->floor_id = $request->floor_id;
         $data->save();
 
         return redirect(route('admin.rooms.index'));
@@ -40,8 +47,14 @@ class RoomController extends Controller
     {
 
         $data = Room::find($id);
-        return view('admin.rooms.edit',compact('data'));
+        $isfloor = Floor::find($data->floor_id);
+        $floors = Floor::all();
 
+        return view('admin.rooms.edit',[
+            'data'=>$data,
+            'isfloor'=>$isfloor,
+            'floors'=>$floors
+        ]);
     }
 
 
@@ -51,7 +64,7 @@ class RoomController extends Controller
         $data = Room::find($id);
         $data->room_number = $request->number;
         $data->count = $request->count;
-        $data->floor = $request->number[0];
+        $data->floor_id = $request->floor_id;
         $data->save();
 
         return redirect(route('admin.rooms.index'));
@@ -68,4 +81,5 @@ class RoomController extends Controller
         return redirect(route('admin.rooms.index'));
 
     }
+
 }
