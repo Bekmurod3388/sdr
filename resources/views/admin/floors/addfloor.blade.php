@@ -24,11 +24,19 @@
                     <form action="{{route('admin.floors.store')}}" method="POST" accept-charset="UTF-8">
                         @csrf
                         <div class="form-group">
+                            <label for="header_ru"> Binoni tanlang</label>
+                            <select class="form-control" name="bino_id">
+                                @foreach($buildings as $building)
+                                <option value="{{$building->id}}">{{$building->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="header_ru"> Qavat raqami </label>
                             <input type="text" name="floor" class="form-control"  placeholder="0-etaj">
                         </div>
 
-                        <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
+                        <button type="submit" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
 
                     </form>
