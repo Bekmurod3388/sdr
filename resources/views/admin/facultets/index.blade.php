@@ -34,7 +34,7 @@
 
                                 <td class="col-2">
                                     <form action="{{ route('admin.facultets.destroy',$post->id) }}" method="POST">
-                                        <a class="btn btn-warning btn-sm" href="{{ route('admin.student_info.edit',$post->id) }}">
+                                        <a class="btn btn-warning btn-sm" href="{{ route('admin.facultets.edit',$post->id) }}">
                                     <span class="btn-label">
                                         <i class="fa fa-pen"></i>
                                     </span>
