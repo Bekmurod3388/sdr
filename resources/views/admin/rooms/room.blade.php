@@ -30,9 +30,12 @@
                         </thead>
                         <tbody>
 
+                        <?php $id=0; ?>
+
                         @foreach($data as $post)
+                            <?php $id++; ?>
                             <tr>
-                                <th scope="row" class="col-1">{{$post->id}}</th>
+                                <th scope="row" class="col-1"> <?php echo $id; ?> </th>
                                 <td>{{$post->room_number}}</td>
                                 <td>{{$post->floor}}</td>
                                 <td>{{$post->count}}</td>
@@ -55,16 +58,28 @@
 
                                     </form>
                                 </td>
-
                             </tr>
                         @endforeach
 
                         </tbody>
                     </table>
+                        <section class="content12 cid-t34gh8nW7r" id="content12-2s">
+
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    @if ($data->links())
+                                        <div class="mt-4 p-4 box has-text-centered">
+                                            {{ $data->links() }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </section>
                 </div>
             </div>
         </div>
     </div>
+
 
 
 @endsection

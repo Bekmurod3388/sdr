@@ -36,11 +36,6 @@
                             <input type="number" name="count" class="form-control" placeholder="0">
                         </div>
 
-                        <div class="form-group">
-                            <label for="header_ru"> Qavat raqami </label>
-                            <input type="number" name="floor" class="form-control" placeholder="0">
-                        </div>
-
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
 

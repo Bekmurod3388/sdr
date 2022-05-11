@@ -10,7 +10,7 @@ class RoomController extends Controller
     public function index()
     {
 
-        $data = Room::all();
+        $data = Room::orderBy('room_number', 'ASC')->paginate(5);
 
         return view('admin.rooms.room',compact('data'));
     }
@@ -29,11 +29,10 @@ class RoomController extends Controller
         $data = new Room();
         $data->room_number = $request->number;
         $data->count = $request->count;
-        $data->floor = $request->floor;
+        $data->floor = $request->number[0];
         $data->save();
 
         return redirect(route('admin.rooms.index'));
-
     }
 
 
@@ -52,10 +51,11 @@ class RoomController extends Controller
         $data = Room::find($id);
         $data->room_number = $request->number;
         $data->count = $request->count;
-        $data->floor = $request->floor;
+        $data->floor = $request->number[0];
         $data->save();
 
         return redirect(route('admin.rooms.index'));
+
 
     }
 
