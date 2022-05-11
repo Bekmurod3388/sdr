@@ -30,7 +30,7 @@
                         <tbody>
                         @foreach($posts as $ind=>$post)
                             <tr>
-                                <th scope="row" class="col-1">{{$ind+1}}</th>
+                                <th scope="row" class="col-1">{{($posts->currentpage()-1)*($posts->perpage())+$ind+1}}</th>
                                 <td>{{$post->name}}</td>
                                 <td>{{$post->surname}}</td>
                                 <td>{{$post->phone}}</td>
