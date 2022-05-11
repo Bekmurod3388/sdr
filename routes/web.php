@@ -36,3 +36,6 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(funct
     Route::post('/attendance', [\App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store');
 });
 
+
+Route::post('/autoroom', [\App\Http\Controllers\AutoSearchController::class, 'room'])->name('roomauto');
+Route::post('/autostudent',[\App\Http\Controllers\AutoSearchController::class, 'student'])->name('studentauto');

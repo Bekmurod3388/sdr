@@ -28,7 +28,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{  request()->routeIs('admin.attendance') ? 'active' : '' }}">
+                <li class="nav-item {{  request()->routeIs('admin.attendance.create') ? 'active' : '' }}">
                     <a href="{{route('admin.attendance.create')}}">
                         <i class="fas fa-user"></i>
                         <p>Davomat</p>

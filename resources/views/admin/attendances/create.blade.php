@@ -23,14 +23,17 @@
 
                     <form action="{{route('admin.attendance.store')}}" method="POST" accept-charset="UTF-8"
                           enctype="multipart/form-data">
-                        @csrf
+                       @csrf
                         <div class="form-group">
                             <label for="floor">Qavat</label>
                             <select name="floor" id="floor" class="form-select form-control">
                                 <option value="none">Qavatni tanlang</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                @foreach($floors as $floor)
+                                    <option value="{{ $floor->floor }}">{{ $floor->floor }}</option>
+                                @endforeach
+{{--                                <option value="1">1</option>--}}
+{{--                                <option value="2">2</option>--}}
+{{--                                <option value="3">3</option>--}}
                             </select>
                         </div>
 
@@ -77,5 +80,31 @@
         }
     </style>
 
+    <script>
+        {{--let students = @json($students);--}}
+        {{--let rooms = @json($rooms);--}}
 
+        {{--console.log(rooms);--}}
+        $(document).ready(function (){
+            $("#floor").on('change', function (){
+                let query = $(this).val();
+                $("#room").empty();
+                $("#room").append('<option value="0" disabled selected >Kuting...</option>');
+                var _token=$('input[name="_token"]').val();
+                console.log('ajaxdan aldin');
+                $.ajax({
+                    type:'post',
+                    url:'/autoroom',
+                    data:{query:query,_token:_token},
+                    success:function (data) {
+                        $("#room").empty();
+                        $("#room").append(data);
+                    }
+
+                });
+                console.log('ajaxdan keyin')
+
+            })
+        });
+    </script>
 @endsection
