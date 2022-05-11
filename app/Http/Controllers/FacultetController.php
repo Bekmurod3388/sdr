@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FakultetRequest;
 use App\Models\Fakultet;
 use App\Models\StudentInfo;
 use Illuminate\Http\Request;
 
 class FacultetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,7 +43,7 @@ class FacultetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(FakultetRequest $request)
     {
         $data=new Fakultet();
         $data->name=$request->name;

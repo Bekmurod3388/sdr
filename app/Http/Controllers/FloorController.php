@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\FloorRequest;
+use App\Models\Bino;
 use App\Models\Floor;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -12,25 +13,19 @@ class FloorController extends Controller
 
     public function index()
     {
-
-        $data = Floor::orderBy('floor', 'ASC')->paginate(5);
-
-        return view('admin.floors.floor',compact('data'));
+        $data = Floor::paginate(10);
+        return view('admin.floors.floor',['data'=>$data]);
     }
 
     public function create(){
-
-        return view('admin.floors.addfloor');
+        $buildings = Bino::all();
+        return view('admin.floors.addfloor',['buildings'=>$buildings]);
 
     }
 
     public function store(FloorRequest $request)
     {
-
-        $data = new Floor();
-        $data->floor = $request->floor;
-        $data->save();
-
+        Floor::create($request->all());
         return redirect(route('admin.floors.index'));
     }
 

@@ -21,25 +21,20 @@
                         <thead>
                         <tr>
                             <th scope="col">Id</th>
+                            <th scope="col">Bino nomi</th>
                             <th scope="col">Qavat raqami</th>
                             <th scope="col">Ammallar</th>
 
                         </tr>
                         </thead>
                         <tbody>
-
-                        <?php $id=0; ?>
-
                         @foreach($data as $post)
-                            <?php $id++; ?>
                             <tr>
-
-                                <th scope="row" class="col-1"> <?php echo $id; ?> </th>
+                                <td scope="row" class="col-1"> {{$post->id}}</td>
+                                <td scope="row" class="col-1">{{$post->bino->name}} </td>
                                 <td>{{$post->floor}}</td>
-
                                 <td class="col-2">
                                     <form action="{{ route('admin.floors.destroy',$post->id) }}" method="POST">
-
                                         <a class="btn btn-warning btn-sm" href="{{ route('admin.floors.edit',$post->id) }}">
                                         <span class="btn-label">
                                             <i class="fa fa-pen"></i>
