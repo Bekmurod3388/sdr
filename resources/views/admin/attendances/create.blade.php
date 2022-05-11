@@ -21,7 +21,7 @@
                     @endif
 
 
-                    <form action="{{route('admin.attendance.store')}}" method="POST" accept-charset="UTF-8"
+                    <form action="{{route('admin.attendances.store')}}" method="POST" accept-charset="UTF-8"
                           enctype="multipart/form-data">
                        @csrf
                         <div class="form-group">
