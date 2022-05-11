@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-10"><h1 class="card-title">Qavat qo'shing</h1></div>
+                    <div class="col-10"><h1 class="card-title">Binoni yangilash</h1></div>
                 </div>
                 <hr>
                 <div class="card-body">
@@ -20,23 +20,31 @@
                         </div>
                     @endif
 
-
-                    <form action="{{route('admin.floors.store')}}" method="POST" accept-charset="UTF-8">
+                    <form action="{{route('admin.binos.update',$data->id)}}" method="POST" accept-charset="UTF-8"
+                          enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
+
                         <div class="form-group">
-                            <label for="header_ru"> Qavat raqami </label>
-                            <input type="text" name="floor" class="form-control"  placeholder="0-etaj">
+                            <label for="description_ru"> Bino nomi </label>
+                            <input type="text" name="name" class="form-control" id="header_ru"
+                                   value="{{$data->name}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="description_ru"> Foydalanuvchi Id </label>
+                            <input type="number" name="user_id" class="form-control" id="header_ru"
+                                   value="{{$data->user_id}}">
                         </div>
 
-                        <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
+
+                        <button type="submit" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
 
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
-
-
 
 @endsection

@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\FloorRequest;
 use App\Models\Floor;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
 class FloorController extends Controller
 {
+
+
     public function index()
     {
 
@@ -22,7 +25,7 @@ class FloorController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(FloorRequest $request)
     {
 
         $data = new Floor();

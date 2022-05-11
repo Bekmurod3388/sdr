@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Floor;
 use App\Models\Room;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class AttendanceController extends Controller
     }
 
     public function create(){
-        $floors = Room::groupBy('floor')->get();
+        $floors = Floor::all();
         $students = Student::OrderBy('id', 'DESC')->get();
         $rooms = Room::OrderBy('id')->get();
         return view('admin.attendances.create',[
