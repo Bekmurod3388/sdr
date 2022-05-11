@@ -30,14 +30,12 @@
                         </thead>
                         <tbody>
 
-                        <?php $id=0; ?>
-
-                        @foreach($data as $post)
+                        @foreach($data as $ind=>$post)
                             @foreach($floors as $floor)
                                 @if( $post['floor_id']==$floor['id'] )
-                                    <?php $id++; ?>
                                     <tr>
-                                        <th scope="row" class="col-1"> <?php echo $id; ?> </th>
+                                        <th scope="row"
+                                            class="col-1"> {{($data->currentpage()-1)*($data->perpage())+$ind+1}} </th>
                                         <td>{{$post->room_number}}</td>
                                         <td>{{$post->count}}</td>
                                         <td>{{$floor->floor}}</td>
@@ -45,11 +43,12 @@
                                         <td class="col-2">
                                             <form action="{{ route('admin.rooms.destroy',$post->id) }}" method="POST">
 
-                                            <a class="btn btn-warning btn-sm" href="{{ route('admin.rooms.edit',$post->id) }}">
+                                                <a class="btn btn-warning btn-sm"
+                                                   href="{{ route('admin.rooms.edit',$post->id) }}">
                                                 <span class="btn-label">
                                                     <i class="fa fa-pen"></i>
                                                 </span>
-                                            </a>
+                                                </a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -62,29 +61,27 @@
                                         </td>
                                     </tr>
                                 @endif
-                          @endforeach
+                            @endforeach
                         @endforeach
 
                         </tbody>
                     </table>
-                        <section class="content12 cid-t34gh8nW7r" id="content12-2s">
+                    <section class="content12 cid-t34gh8nW7r" id="content12-2s">
 
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    @if ($data->links())
-                                        <div class="mt-4 p-4 box has-text-centered">
-                                            {{ $data->links() }}
-                                        </div>
-                                    @endif
-                                </div>
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                @if ($data->links())
+                                    <div class="mt-4 p-4 box has-text-centered">
+                                        {{ $data->links() }}
+                                    </div>
+                                @endif
                             </div>
-                        </section>
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
     </div>
-
-
 
 @endsection
 

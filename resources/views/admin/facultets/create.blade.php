@@ -26,12 +26,12 @@
                         @csrf
                         <div class="form-group">
                             <label for="header_ru">Fakultet</label>
-                            <input type="text" name="name" class="form-control" id="header_ru" placeholder="Sarlavha">
+                            <input type="text" name="name" class="form-control" id="header_ru" placeholder="Fakultet">
                         </div>
 
 
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
-                        <input type="reset" class="btn btn-danger" value="Tozalash">
+                        <input type="reset" class="btn btn-danger" value="Очистить">
                     </form>
                 </div>
             </div>

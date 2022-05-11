@@ -24,7 +24,6 @@ class FloorController extends Controller
 
     }
 
-
     public function store(FloorRequest $request)
     {
 
