@@ -31,9 +31,19 @@
                             <input type="text" name="number" class="form-control"  placeholder="000-A">
                         </div>
 
+
                         <div class="form-group">
                             <label for="header_ru"> O`rinlar soni </label>
                             <input type="number" name="count" class="form-control" placeholder="0">
+                        </div>
+
+                        <div class="form-group">
+                            <select name="floor_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <option value="0" selected>Qavatni tanlang</option>
+                                @foreach($floors as $floor)
+                                    <option value="{{$floor->id}}">{{$floor->floor}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>

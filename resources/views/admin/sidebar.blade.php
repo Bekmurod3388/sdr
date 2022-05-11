@@ -20,6 +20,12 @@
                         <p>Xonalar</p>
                     </a>
                 </li>
+                <li class="nav-item {{  request()->routeIs('admin.floors.index') ? 'active' : '' }}">
+                    <a href="{{route('admin.floors.index')}}">
+                        <i class="fas fa-user"></i>
+                        <p>Qavatlar</p>
+                    </a>
+                </li>
 
                 <li class="nav-item {{  request()->routeIs('admin.facultets.index') ? 'active' : '' }}">
                     <a href="{{route('admin.facultets.index')}}">
