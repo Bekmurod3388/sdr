@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Floor extends Model
 {
     use HasFactory;
-    protected $fillable = ['floor'];
+    protected $fillable = ['bino_id','floor'];
 
-    public function room(){
-        return $this->hasMany(Room::class);
+    public function bino(){
+        return $this->belongsTo(Bino::class);
     }
+
 }
