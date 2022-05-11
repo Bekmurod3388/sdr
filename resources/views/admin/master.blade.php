@@ -5,7 +5,6 @@
     <title>Administrator paneli</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport'/>
     <link rel="icon" href="{{asset('/asset/img/icon.ico')}}" type="image/x-icon"/>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
     <script src="{{asset('/asset/js/core/jquery.3.2.1.min.js')}}"></script>

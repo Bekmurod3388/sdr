@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-10"><h1 class="card-title">Yangilik qo'shing</h1></div>
+                    <div class="col-10"><h1 class="card-title">Xona qo'shing</h1></div>
                 </div>
                 <hr>
                 <div class="card-body">
@@ -34,11 +34,6 @@
                         <div class="form-group">
                             <label for="header_ru"> O`rinlar soni </label>
                             <input type="number" name="count" class="form-control" placeholder="0">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="header_ru"> Qavat raqami </label>
-                            <input type="number" name="floor" class="form-control" placeholder="0">
                         </div>
 
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>

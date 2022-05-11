@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-9"><h1 class="card-title">Fakultet</h1></div>
                     <div class="col-md-1">
-                        <a class="btn btn-primary" href="{{route('admin.student_info.create')}}">
+                        <a class="btn btn-primary" href="{{route('admin.facultets.create')}}">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
@@ -19,22 +19,22 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Nomi</th>
-                            <th scope="col">Amal</th>
+                            <th>ID</th>
+                            <th>Nomi</th>
+                            <th>Amal</th>
 
                          </tr>
                         </thead>
                         <tbody>
                         @foreach($posts as $post)
                             <tr>
-                                <th scope="row" class="col-1">{{$post->id}}</th>
-                                <td>{{$post->name}}</td>
+                                <td  class="col-2">{{$post->id}}</td>
+                                <td class="col-8">{{$post->name}}</td>
 
 
                                 <td class="col-2">
-                                    <form action="{{ route('admin.student_info.destroy',$post->id) }}" method="POST">
-                                        <a class="btn btn-warning btn-sm" href="{{ route('admin.student_info.edit',$post->id) }}">
+                                    <form action="{{ route('admin.facultets.destroy',$post->id) }}" method="POST">
+                                        <a class="btn btn-warning btn-sm" href="{{ route('admin.facultets.edit',$post->id) }}">
                                     <span class="btn-label">
                                         <i class="fa fa-pen"></i>
                                     </span>
