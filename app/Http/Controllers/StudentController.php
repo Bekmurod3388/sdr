@@ -83,26 +83,38 @@ class StudentController
 
     public function update(Request $request, $id)
     {
+        $request=$request->validate([
+            "name"=>'required ',
+            "surname"=>'required ',
+            "f_s_name"=>'required ',
+            "address"=>'required ',
+            "phone"=>['required',new PhoneNumber],
+            "passport"=>['required',new PassportNumber],
+            "parent_name"=>'required ',
+            "parent_phone"=>['required',new PhoneNumber],
+            "room_id"=>'required',
+            "fak_id"=>'required'
+        ]);
         $data = Student::find($id);
-        $data->name = $request->name;
-        $data->surname = $request->surname;
-        $data->f_s_name = $request->f_s_name;
-        $data->address = $request->address;
-        $data->phone = $request->phone;
-        $data->passport = $request->passport;
-        $data->parent_name = $request->parent_name;
-        $data->parent_phone = $request->parent_phone;
-        if ($data->room_id != $request->room_id) {
+        $data->name = $request['name'];
+        $data->surname = $request['surname'];
+        $data->f_s_name = $request['f_s_name'];
+        $data->address = $request['address'];
+        $data->phone = $request['phone'];
+        $data->passport = $request['passport'];
+        $data->parent_name = $request['parent_name'];
+        $data->parent_phone = $request['parent_phone'];
+        if ($data->room_id != $request['room_id']) {
             $room = Room::find($data->room_id);
             $room->busy -= 1;
             $room->save();
 
-            $room = Room::find($request->room_id);
+            $room = Room::find($request['room_id']);
             $room->busy += 1;
             $room->save();
-            $data->room_id = $request->room_id;
+            $data->room_id = $request['room_id'];
         }
-        $data->fak_id = $request->fak_id;
+        $data->fak_id = $request['fak_id'];
         $data->save();
 
         return redirect(route('admin.students.index'));
