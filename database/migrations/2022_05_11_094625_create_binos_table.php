@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('floors', function (Blueprint $table) {
-
+        Schema::create('binos', function (Blueprint $table) {
             $table->id();
-            $table->string('floor')->unique();
-            $table->integer('bino_id');
+            $table->string('name')->unique();
+            $table->integer('user_id')->default(0);
             $table->timestamps();
-
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('floors');
+        Schema::dropIfExists('binos');
     }
 };

@@ -25,6 +25,16 @@
                           enctype="multipart/form-data">
                        @csrf
                         <div class="form-group">
+                            <label for="building">Bino</label>
+                            <select name="building" id="building" class="form-select form-control">
+                                <option value="none">Binoni tanlang</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="floor">Qavat</label>
                             <select name="floor" id="floor" class="form-select form-control">
                                 <option value="none">Qavatni tanlang</option>
@@ -81,10 +91,6 @@
     </style>
 
     <script>
-        {{--let students = @json($students);--}}
-        {{--let rooms = @json($rooms);--}}
-
-        {{--console.log(rooms);--}}
         $(document).ready(function (){
             $("#floor").on('change', function (){
                 let query = $(this).val();
@@ -103,7 +109,6 @@
 
                 });
                 console.log('ajaxdan keyin')
-
             })
         });
     </script>

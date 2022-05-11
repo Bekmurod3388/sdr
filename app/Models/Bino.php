@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Floor extends Model
+class Bino extends Model
 {
     use HasFactory;
-    protected $fillable = ['floor'];
+    protected $fillable = ['name'];
 
-    public function room(){
-        return $this->hasMany(Room::class);
-    }
 }
