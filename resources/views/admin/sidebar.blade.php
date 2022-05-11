@@ -28,8 +28,8 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{  request()->routeIs('admin.attendance.create') ? 'active' : '' }}">
-                    <a href="{{route('admin.attendance.create')}}">
+                <li class="nav-item {{  request()->routeIs('admin.attendances.index') ? 'active' : '' }}">
+                    <a href="{{route('admin.attendances.index')}}">
                         <i class="fas fa-user"></i>
                         <p>Davomat</p>
                     </a>

@@ -33,8 +33,9 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(funct
     Route::resource('rooms', App\Http\Controllers\RoomController::class);
     Route::resource('student_info', App\Http\Controllers\StudentInfoController::class);
     Route::resource('facultets', App\Http\Controllers\FacultetController::class);
-    Route::get('/attendances/create', [\App\Http\Controllers\AttendanceController::class, 'create'])->name('attendance.create');
-    Route::post('/attendance', [\App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store');
+    Route::resource('attendances', \App\Http\Controllers\AttendanceController::class);
+//    Route::get('/attendances/create', [\App\Http\Controllers\AttendanceController::class, 'create'])->name('attendance.create');
+//    Route::post('/attendance', [\App\Http\Controllers\AttendanceController::class, 'store'])->name('attendance.store');
 });
 
 Route::post('/autoroom', [\App\Http\Controllers\AutoSearchController::class, 'room'])->name('roomauto');

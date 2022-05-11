@@ -13,4 +13,8 @@ class Student extends Model
     public function rooms(){
         return hasOne(Room::class);
     }
+
+    public function attendances(){
+        return $this->hasMany(Attendance::class)->orderBy('created_at', 'DESC');
+    }
 }

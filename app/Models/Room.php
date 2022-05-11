@@ -9,4 +9,8 @@ class Room extends Model
 {
     use HasFactory;
     protected $fillable = ['room_number','count'];
+
+    public function attendances(){
+        return $this->hasMany(Attendance::class)->orderBy('created_at', 'DESC');
+    }
 }
