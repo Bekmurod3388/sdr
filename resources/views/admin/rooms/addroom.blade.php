@@ -11,7 +11,7 @@
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
-                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <strong>Whoops!</strong> Qayerdadir Xatolik bo`ldi!..<br><br>
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -35,6 +35,15 @@
                         <div class="form-group">
                             <label for="header_ru"> O`rinlar soni </label>
                             <input type="number" name="count" class="form-control" placeholder="0">
+                        </div>
+
+                        <div class="form-group">
+                            <select name="floor_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <option value="0" selected>Binoni tanlang</option>
+                                @foreach($binos as $bino)
+                                    <option value="{{$bino->id}}">{{$bino->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">

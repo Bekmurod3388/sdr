@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RoomRequest;
+use App\Models\Bino;
 use App\Models\Floor;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -33,7 +34,11 @@ class RoomController extends Controller
     {
 
         $floors = Floor::all();
-        return view('admin.rooms.addroom', compact('floors'));
+        $binos = Bino::all();
+        return view('admin.rooms.addroom', [
+            'floors'=>$floors,
+            'binos'=>$binos
+        ]);
 
     }
 

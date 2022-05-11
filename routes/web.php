@@ -33,7 +33,6 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(funct
     Route::resource('rooms', App\Http\Controllers\RoomController::class);
     Route::resource('floors', App\Http\Controllers\FloorController::class);
     Route::resource('binos', App\Http\Controllers\BinoController::class);
-    Route::resource('student_info', App\Http\Controllers\StudentInfoController::class);
     Route::resource('facultets', App\Http\Controllers\FacultetController::class);
     Route::resource('attendances', \App\Http\Controllers\AttendanceController::class);
 });

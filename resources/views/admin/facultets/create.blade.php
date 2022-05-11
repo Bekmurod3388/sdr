@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-10"><h1 class="card-title">Yangilik qo'shing</h1></div>
+                    <div class="col-10"><h1 class="card-title">Fakultet qo'shing</h1></div>
                 </div>
                 <hr>
                 <div class="card-body">
@@ -21,7 +21,7 @@
                     @endif
 
 
-                    <form action="{{route('admin.student_info.store')}}" method="POST" accept-charset="UTF-8"
+                    <form action="{{route('admin.facultets.store')}}" method="POST" accept-charset="UTF-8"
                           enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
