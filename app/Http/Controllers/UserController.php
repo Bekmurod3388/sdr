@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::first();
-        return view('admin.users.index')->with('user',$user);
+        $user = User::all();
+        return view('admin.users.index')->with('users',$user);
 
     }
 
@@ -28,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return  view('admin.users.create');
     }
 
     /**
@@ -37,9 +38,16 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user=new User();
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->password=Hash::make($request->password);
+        $user->save();
+
+        return redirect()->route('admin.users.index')
+            ->with('success','Muvaffaqqiyatli yaratildii');
     }
 
     /**
@@ -85,7 +93,7 @@ class UserController extends Controller
             'password'=>Hash::make($request->password)
         ]);
         return redirect()->route('admin.users.index')
-            ->with('success','Успешно Обновлено');
+            ->with('success','Muvaffaqqiyatli yangilandi');
     }
 
     /**
@@ -96,7 +104,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=User::find($id);
+        $user->delete();
+        return redirect()->route('admin.users.index')
+            ->with('success','Muvaffaqqiyatli o`chirildi');
+
     }
     /*public function logout(Request $request) {
         Auth::logout();
