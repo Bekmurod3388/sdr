@@ -15,7 +15,7 @@
                     <div class="dropdown-user-scroll scrollbar-outer">
                         <li>
                             <div class="user-box">
-                                <div class="avatar-lg"><img src="{{asset('/img/user.png')}}" alt="image profile" class="avatar-img rounded"></div>
+                                <div class="avatar-lg"><img src="{{asset('asset/img/mlane.jpg')}}" alt="image profile" class="avatar-img rounded"></div>
                                 <div class="u-text">
                                     <h4>{{Auth::user()->name}}</h4>
 
