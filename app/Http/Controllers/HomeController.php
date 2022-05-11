@@ -23,6 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.master');
+        return redirect(route('admin.students.index'));
     }
 }
