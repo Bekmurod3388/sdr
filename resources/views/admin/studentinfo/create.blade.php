@@ -26,7 +26,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="header_ru">Fakultet</label>
-                            <input type="text" name="name" class="form-control" id="header_ru" placeholder="Титул">
+                            <input type="text" name="name" class="form-control" id="header_ru" placeholder="Fakultet">
                         </div>
 
 
