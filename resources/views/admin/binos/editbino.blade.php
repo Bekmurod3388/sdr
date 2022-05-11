@@ -30,10 +30,14 @@
                             <input type="text" name="name" class="form-control" id="header_ru"
                                    value="{{$data->name}}">
                         </div>
+
                         <div class="form-group">
-                            <label for="description_ru"> Foydalanuvchi Id </label>
-                            <input type="number" name="user_id" class="form-control" id="header_ru"
-                                   value="{{$data->user_id}}">
+                            <select name="user_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <option value="0" selected> {{ $isUser->email }} </option>
+                                @foreach($users as $user)
+                                    <option value="{{$user->id}}">{{$user->email}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
 

@@ -30,9 +30,14 @@
                             <label for="header_ru"> Bino nomi </label>
                             <input type="text" name="name" class="form-control" placeholder=" kiriting.. ">
                         </div>
+
                         <div class="form-group">
-                            <label for="header_ru"> User Id </label>
-                            <input type="number" name="user_id" class="form-control" placeholder=" 0 ">
+                            <select name="user_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
+                                <option value="0" selected> Foydalanuvchini tanlang</option>
+                                @foreach($users as $user)
+                                    <option value="{{$user->id}}">{{$user->email}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>

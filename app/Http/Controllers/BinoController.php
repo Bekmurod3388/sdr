@@ -6,6 +6,7 @@ use App\Http\Requests\BinoRequest;
 use App\Models\Floor;
 use App\Models\Room;
 use App\Models\Bino;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BinoController extends Controller
@@ -21,15 +22,23 @@ class BinoController extends Controller
     {
 
         $data = Bino::all();
+        $users = User::all();
 
-        return view('admin.binos.bino', compact('data'));
+        return view('admin.binos.bino' , [
+            'data'=>$data,
+            'users'=>$users
+        ]);
 
     }
 
     public function create()
     {
+        $users = User::all();
 
-        return view('admin.binos.addbino');
+        return view('admin.binos.addbino' , [
+            'users'=>$users
+        ]);
+
 
     }
 
@@ -49,7 +58,14 @@ class BinoController extends Controller
     {
 
         $data = Bino::find($id);
-        return view('admin.binos.editbino', compact('data'));
+        $isUser = User::find($data->user_id);
+        $users = User::all();
+
+        return view('admin.binos.editbino' , [
+            'data'=>$data,
+            'isUser'=>$isUser,
+            'users'=>$users
+        ]);
 
     }
 
