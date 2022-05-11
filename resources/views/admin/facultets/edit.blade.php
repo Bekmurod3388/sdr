@@ -21,7 +21,7 @@
                     @endif
 
 
-                    <form action="{{route('admin.student_info.update',$post->id)}}" method="POST" name="id" accept-charset="UTF-8" enctype="multipart/form-data">
+                    <form action="{{route('admin.facultets.update',$post->id)}}" method="POST" name="id" accept-charset="UTF-8" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="form-group">

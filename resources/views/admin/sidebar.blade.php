@@ -21,8 +21,8 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{  request()->routeIs('admin.student_info.index') ? 'active' : '' }}">
-                    <a href="{{route('admin.student_info.index')}}">
+                <li class="nav-item {{  request()->routeIs('admin.facultets.index') ? 'active' : '' }}">
+                    <a href="{{route('admin.facultets.index')}}">
                         <i class="fas fa-user"></i>
                         <p>Fakultet</p>
                     </a>
