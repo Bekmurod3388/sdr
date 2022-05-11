@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->id();
             $table->string('room_number',10)->unique();
-            $table->integer('floor');
+            $table->integer('floor_id');
             $table->integer('count');
             $table->integer('busy')->default(0);
             $table->timestamps();
