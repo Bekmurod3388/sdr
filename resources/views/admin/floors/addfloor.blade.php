@@ -21,11 +21,8 @@
                     @endif
 
 
-                    <form action="{{route('admin.floors.store')}}" method="POST" accept-charset="UTF-8"
-
-                          enctype="multipart/form-data">
+                    <form action="{{route('admin.floors.store')}}" method="POST" accept-charset="UTF-8">
                         @csrf
-
                         <div class="form-group">
                             <label for="header_ru"> Qavat raqami </label>
                             <input type="text" name="floor" class="form-control"  placeholder="0-etaj">
