@@ -24,26 +24,28 @@
                     <form action="{{route('admin.users.update',$user)}}" method="POST" accept-charset="UTF-8">
                         @csrf
                         @method('PUT')
-                    <div class="form-group">
-                        <label for="name">Ism
+                        <div class="form-group">
+                            <label for="name">Ism
 
-                        </label>
-                        <input type="text" name="name" class="form-control" id="name" placeholder="Имя" value="{{$user->name}}">
-                    </div>
+                            </label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="Имя"
+                                   value="{{$user->name}}">
+                        </div>
                         <div class="form-group">
                             <label for="email">Elektron pochta</label>
-                            <input type="text" name="email" class="form-control" id="email" placeholder="Email" value="{{$user->email}}">
+                            <input type="text" name="email" class="form-control" id="email" placeholder="Email"
+                                   value="{{$user->email}}">
                         </div>
-                    <div class="form-group">
-                        <label for="pwd">Parol</label>
-                        <input type="password" name="password" class="form-control" id="pwd">
-                    </div>
-                    <div class="form-group">
-                        <label for="pwd_confirm">Parolni qayta kiriting</label>
-                        <input type="password" name="password_confirmation" class="form-control" id="pwd_confirm">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Saqlash</button>
-                    <input type="reset" class="btn btn-danger" value="Tozalash">
+                        <div class="form-group">
+                            <label for="pwd">Parol</label>
+                            <input type="password" name="password" class="form-control" id="pwd">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd_confirm">Parolni qayta kiriting</label>
+                            <input type="password" name="password_confirmation" class="form-control" id="pwd_confirm">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Saqlash</button>
+                        <input type="reset" class="btn btn-danger" value="Tozalash">
                     </form>
                 </div>
             </div>

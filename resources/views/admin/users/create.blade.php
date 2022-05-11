@@ -25,19 +25,23 @@
                         @csrf
                         <div class="form-group">
                             <label for="header_ru">Foydalanuvchi nomi</label>
-                            <input type="text" name="name" required class="form-control" id="header_ru" value="{{old('name')}}" placeholder="username">
+                            <input type="text" name="name" required class="form-control" id="header_ru"
+                                   value="{{old('name')}}" placeholder="username">
                         </div>
                         <div class="form-group">
                             <label for="header_ru">Email</label>
-                            <input type="email" name="email" required class="form-control" id="header_ru" value="{{old('email')}}" placeholder="user@example.com">
+                            <input type="email" name="email" required class="form-control" id="header_ru"
+                                   value="{{old('email')}}" placeholder="user@example.com">
                         </div>
                         <div class="form-group">
                             <label for="header_ru">Parol o'rnating</label>
-                            <input type="password" name="password" required class="form-control" id="header_ru" placeholder="password">
+                            <input type="password" name="password" required class="form-control" id="header_ru"
+                                   placeholder="password">
                         </div>
                         <div class="form-group">
                             <label for="header_ru">Parolni takrorlang</label>
-                            <input type="password" name="password_confirm" required class="form-control" id="header_ru" placeholder="password">
+                            <input type="password" name="password_confirm" required class="form-control" id="header_ru"
+                                   placeholder="password">
                         </div>
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
@@ -46,7 +50,5 @@
             </div>
         </div>
     </div>
-
-
 
 @endsection

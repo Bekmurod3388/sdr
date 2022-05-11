@@ -36,7 +36,8 @@
 
                                 <td class="col-2">
                                     <form action="{{ route('admin.users.destroy',$user->id) }}" method="POST">
-                                        <a class="btn btn-warning btn-sm" href="{{ route('admin.users.edit',$user->id) }}">
+                                        <a class="btn btn-warning btn-sm"
+                                           href="{{ route('admin.users.edit',$user->id) }}">
                                     <span class="btn-label">
                                         <i class="fa fa-pen"></i>
                                     </span>
