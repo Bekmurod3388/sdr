@@ -2,35 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoomRequest;
 use App\Models\Floor;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
 
         $data = Room::orderBy('room_number', 'ASC')->paginate(5);
         $floors = Floor::all();
 
-        return view('admin.rooms.room',[
-            'data'=>$data,
-            'floors'=>$floors
+        return view('admin.rooms.room', [
+            'data' => $data,
+            'floors' => $floors
         ]);
 
     }
 
 
-    public function create(){
+    public function create()
+    {
 
         $floors = Floor::all();
-        return view('admin.rooms.addroom',compact('floors'));
+        return view('admin.rooms.addroom', compact('floors'));
 
     }
 
 
-    public function store(Request $request)
+    public function store(RoomRequest $request)
     {
 
         $data = new Room();
@@ -50,10 +58,10 @@ class RoomController extends Controller
         $isfloor = Floor::find($data->floor_id);
         $floors = Floor::all();
 
-        return view('admin.rooms.edit',[
-            'data'=>$data,
-            'isfloor'=>$isfloor,
-            'floors'=>$floors
+        return view('admin.rooms.edit', [
+            'data' => $data,
+            'isfloor' => $isfloor,
+            'floors' => $floors
         ]);
     }
 
