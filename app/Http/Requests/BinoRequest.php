@@ -25,6 +25,7 @@ class BinoRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'user_id' => 'required| not_in : 0',
         ];
     }
 }

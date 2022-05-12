@@ -36,6 +36,7 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(funct
     Route::resource('binos', App\Http\Controllers\BinoController::class);
     Route::resource('facultets', App\Http\Controllers\FacultetController::class);
     Route::resource('attendances', AttendanceController::class);
+    Route::view('super','admin.super_admin.index')->name('super');
 });
 
 Route::post('/autoroom', [\App\Http\Controllers\AutoSearchController::class, 'room'])->name('roomauto');

@@ -8,6 +8,7 @@ use App\Models\Bino;
 use App\Models\Floor;
 use App\Models\Room;
 use App\Models\Student;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -15,7 +16,7 @@ class AttendanceController extends Controller
 
     public function index()
     {
-        $attendances = Attendance::OrderBy('id', 'DESC')->get();
+        $attendances = Attendance::whereDate('created_at', Carbon::today())->OrderBy('id', 'DESC')->get();
 //        dd($attendances);
         return view('admin.attendances.index', [
             'attendances' => $attendances
@@ -45,12 +46,12 @@ class AttendanceController extends Controller
         for ($i = 0; $i < $room_in_students; $i++) {
             $attendance = new Attendance();
             $attendance['student_id'] = $students[$i]['id'];
-            for ($j = 0; $j < count($students_request); $j++) {
-                if ($students[$i]['id'] == $students_request[$j]) {
-                    $cnt++;
+            if ($students_request != NULL)
+                for ($j = 0; $j < count($students_request); $j++) {
+                    if ($students[$i]['id'] == $students_request[$j]) {
+                        $cnt++;
+                    }
                 }
-            }
-//            dd($cnt);
             if ($cnt == 0) $attendance['check'] = 0;
             else $attendance['check'] = 1;
             $attendance['room_id'] = $request['room'];

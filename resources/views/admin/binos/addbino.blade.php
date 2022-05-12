@@ -32,8 +32,8 @@
                         </div>
 
                         <div class="form-group">
-                            <select name="user_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option value="0" selected> Foydalanuvchini tanlang</option>
+                            <select name="user_id" required class="form-select form-control form-select-lg mb-3">
+                                <option value="0"> Foydalanuvchini tanlang</option>
                                 @foreach($users as $user)
                                     <option value="{{$user->id}}">{{$user->email}}</option>
                                 @endforeach

@@ -17,7 +17,7 @@
                 </div>
                 <hr>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered text-center">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -25,33 +25,22 @@
                             <th scope="col">Xona</th>
                             <th scope="col">Tekshirish</th>
                             <th scope="col">Sana</th>
-{{--                            <th scope="col">Amallar</th>--}}
+                            {{--                            <th scope="col">Amallar</th>--}}
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($attendances as $attendance)
-                            <tr>
-                                <th scope="row" class="col-1">{{$attendance->id}}</th>
-                                <td>{{ $attendance->student->name }}</td>
-                                <td>{{ $attendance->room->room_number }}</td>
-                                <td>{{ $attendance->check }}</td>
-                                <td>{{ $attendance->created_at }}</td>
-{{--                                <td class="col-2">--}}
-{{--                                    <form action="{{ route('admin.attendances.destroy',$attendance->id) }}" method="POST">--}}
-{{--                                        <a class="btn btn-warning btn-sm" href="{{ route('admin.attendances.edit',$attendance->id) }}">--}}
-{{--                                    <span class="btn-label">--}}
-{{--                                        <i class="fa fa-pen"></i>--}}
-{{--                                    </span>--}}
-
-{{--                                        </a>--}}
-{{--                                        @csrf--}}
-{{--                                        @method('DELETE')--}}
-{{--                                        <button type="submit" class="btn btn-danger btn-sm"><span class="btn-label">--}}
-{{--                                        <i class="fa fa-trash"></i>--}}
-{{--                                    </span></button>--}}
-{{--                                    </form>--}}
-{{--                                </td>--}}
-                            </tr>
+                            @if($attendance->check == 1)
+                                <tr>
+                                    <th scope="row" class="col-1">{{ $attendance->id}}</th>
+                                    <td>{{ $attendance->student->name }}</td>
+                                    <td>{{ $attendance->room->room_number }}</td>
+                                    @if($attendance->check == 1)
+                                        <td> Yo'q</td>
+                                    @endif
+                                    <td>{{ $attendance->created_at }}</td>
+                                </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>
