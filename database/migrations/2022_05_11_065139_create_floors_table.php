@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('floors', function (Blueprint $table) {
 
             $table->id();
-            $table->string('floor')->unique();
+            $table->string('floor');
             $table->integer('bino_id');
             $table->timestamps();
 

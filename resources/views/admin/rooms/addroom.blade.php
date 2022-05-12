@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="form-group">
-                            <select name="floor_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
+                            <select name="floor_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example" id="building">
                                 <option value="0" selected>Binoni tanlang</option>
                                 @foreach($binos as $bino)
                                     <option value="{{$bino->id}}">{{$bino->name}}</option>
@@ -47,11 +47,9 @@
                         </div>
 
                         <div class="form-group">
-                            <select name="floor_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
+                            <select name="floor_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example" id="floor">
                                 <option value="0" selected>Qavatni tanlang</option>
-                                @foreach($floors as $floor)
-                                    <option value="{{$floor->id}}">{{$floor->floor}}</option>
-                                @endforeach
+
                             </select>
                         </div>
 
@@ -66,4 +64,23 @@
 
 
 
+@endsection
+@section('script')
+    <script>
+        let buildings = @json($binos);
+        let floors = @json($floors);
+        $('#building').on('change', function () {
+            var value = $(this).val();
+            $('#floor').empty();
+            $('#floor').append("<option value='none'>Qavatni tanlang</option>")
+            for (let i = 0; i < floors.length; i++) {
+                if (value == floors[i].bino_id) {
+                    var option = document.createElement("option");   // Create with DOM
+                    option.innerHTML = floors[i].floor;
+                    option.value = floors[i].id;
+                    $('#floor').append(option);
+                }
+            }
+        });
+    </script>
 @endsection
