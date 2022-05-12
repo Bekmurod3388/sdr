@@ -13,7 +13,7 @@ class StudentController
 {
     public function index()
     {
-        $post = Student::paginate(2);
+        $post = Student::paginate(15);
         return view('admin.students.index', ["posts" => $post]);
     }
 
