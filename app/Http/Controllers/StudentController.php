@@ -9,8 +9,10 @@ use App\Rules\PassportNumber;
 use App\Rules\PhoneNumber;
 use Illuminate\Http\Request;
 
+
 class StudentController
 {
+
     public function index()
     {
         $post = Student::paginate(15);
