@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
 
             $table->id();
-            $table->string('room_number',10)->unique();
+            $table->string('room_number',10);
             $table->integer('floor_id');
             $table->integer('count');
             $table->integer('busy')->default(0);
