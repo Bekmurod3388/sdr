@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Bino;
 use App\Models\Floor;
 use App\Models\Room;
 use App\Models\Student;
@@ -21,12 +22,14 @@ class AttendanceController extends Controller
 
     public function create(){
         $floors = Floor::all();
+        $buildings = Bino::all();
         $students = Student::OrderBy('id', 'DESC')->get();
         $rooms = Room::OrderBy('id')->get();
         return view('admin.attendances.create',[
             'students' => $students,
             'rooms' => $rooms,
-            'floors' => $floors
+            'floors' => $floors,
+            'buildings'=>$buildings
         ]);
     }
 

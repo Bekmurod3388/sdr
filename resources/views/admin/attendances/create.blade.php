@@ -21,16 +21,15 @@
                     @endif
 
 
-                    <form action="{{route('admin.attendances.store')}}" method="POST" accept-charset="UTF-8"
-                          enctype="multipart/form-data">
+                    <form action="{{route('admin.attendances.store')}}" method="POST" accept-charset="UTF-8">
                        @csrf
                         <div class="form-group">
                             <label for="building">Bino</label>
                             <select name="building" id="building" class="form-select form-control">
                                 <option value="none">Binoni tanlang</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
+                                @foreach($buildings as $building)
+                                <option value="{{$building->id}}">{{$building->name}}</option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -38,9 +37,9 @@
                             <label for="floor">Qavat</label>
                             <select name="floor" id="floor" class="form-select form-control">
                                 <option value="none">Qavatni tanlang</option>
-                                @foreach($floors as $floor)
-                                    <option value="{{ $floor->floor }}">{{ $floor->floor }}</option>
-                                @endforeach
+
+
+
 {{--                                <option value="1">1</option>--}}
 {{--                                <option value="2">2</option>--}}
 {{--                                <option value="3">3</option>--}}
@@ -51,9 +50,6 @@
                             <label for="room">Xona</label>
                             <select name="room" id="room" class="form-select form-control">
                                 <option value="none">Xonani tanlang</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
                             </select>
                         </div>
 
@@ -74,8 +70,8 @@
                                 </label>
                             </div>
                         </div>
-
-                        <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
+                        <a href="#" onclick="alert()">saqlash</a>
+                        {{--<button onclick="alert()" class="btn btn-primary">Saqlash</button>--}}
                         <input type="reset" class="btn btn-danger" value="Tozalash">
                     </form>
                 </div>
@@ -91,25 +87,33 @@
     </style>
 
     <script>
-        $(document).ready(function (){
-            $("#floor").on('change', function (){
-                let query = $(this).val();
-                $("#room").empty();
-                $("#room").append('<option value="0" disabled selected >Kuting...</option>');
-                var _token=$('input[name="_token"]').val();
-                console.log('ajaxdan aldin');
-                $.ajax({
-                    type:'post',
-                    url:'/autoroom',
-                    data:{query:query,_token:_token},
-                    success:function (data) {
-                        $("#room").empty();
-                        $("#room").append(data);
-                    }
 
-                });
-                console.log('ajaxdan keyin')
-            })
+        let buildings = @json($buildings);
+        let floors = @json($floors);
+        let rooms = @json($rooms);
+            $('#building').on('change', function() {
+                var value = $(this).val();
+                $('#floor').empty();
+                for(let i=0; i<floors.length; i++){
+                    if(value == floors[i].bino_id){
+                        var option = document.createElement("option");   // Create with DOM
+                        option.innerHTML = floors[i].floor;
+                        option.value = floors[i].id;
+                         $('#floor').append(option);
+                    }
+                }
+        });
+        $('#floor').on('change', function() {
+            var room_id = $(this).val();
+            $('#room').empty();
+            for(let i=0; i<rooms.length; i++){
+                if(room_id == rooms[i].floor_id){
+                    var option = document.createElement("option");   // Create with DOM
+                    option.innerHTML = rooms[i].room_number;
+                    option.value = rooms[i].id;
+                    $('#room').append(option);
+                }
+            }
         });
     </script>
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,7 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(funct
     Route::resource('floors', App\Http\Controllers\FloorController::class);
     Route::resource('binos', App\Http\Controllers\BinoController::class);
     Route::resource('facultets', App\Http\Controllers\FacultetController::class);
-    Route::resource('attendances', \App\Http\Controllers\AttendanceController::class);
+    Route::resource('attendances', AttendanceController::class);
 });
 
 Route::post('/autoroom', [\App\Http\Controllers\AutoSearchController::class, 'room'])->name('roomauto');

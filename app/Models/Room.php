@@ -13,4 +13,7 @@ class Room extends Model
     public function attendances(){
         return $this->hasMany(Attendance::class)->orderBy('created_at', 'DESC');
     }
+    public function floor(){
+        return $this->belongsTo(Floor::class,'floor_id');
+    }
 }
