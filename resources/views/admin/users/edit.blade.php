@@ -43,6 +43,8 @@
                         <div class="form-group">
                             <label for="pwd_confirm">Parolni qayta kiriting</label>
                             <input type="password" name="password_confirmation" class="form-control" id="pwd_confirm">
+                            <input type="checkbox" onclick="myFunction1()" id="chb">
+                            <label for="chb">Parolni ko'rsatish</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
@@ -51,5 +53,34 @@
             </div>
         </div>
     </div>
+
+@endsection
+@section('script')
+    <script>
+        // const togglePassword = document.querySelector('#togglePassword');
+        // const password = document.querySelector('#id_password');
+        //
+        // togglePassword.addEventListener('click', function (e) {
+        //     // toggle the type attribute
+        //     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        //     password.setAttribute('type', type);
+        //     // toggle the eye slash icon
+        //     this.classList.toggle('fa-eye-slash');
+        // });
+        function myFunction1() {
+            var x = document.getElementById("pwd_confirm");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            var x = document.getElementById("pwd");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 
 @endsection
