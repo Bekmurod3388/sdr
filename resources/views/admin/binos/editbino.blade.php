@@ -31,16 +31,6 @@
                                    value="{{$data->name}}">
                         </div>
 
-                        <div class="form-group">
-                            <select name="user_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example">
-                                <option value="0" selected> {{ $isUser->email }} </option>
-                                @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->email}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-
                         <button type="submit" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
 

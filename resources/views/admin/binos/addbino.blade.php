@@ -31,14 +31,6 @@
                             <input type="text" name="name" class="form-control" placeholder=" kiriting.. ">
                         </div>
 
-                        <div class="form-group">
-                            <select name="user_id" required class="form-select form-control form-select-lg mb-3">
-                                <option value="0"> Foydalanuvchini tanlang</option>
-                                @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->email}}</option>
-                                @endforeach
-                            </select>
-                        </div>
 
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">

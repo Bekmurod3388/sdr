@@ -135,7 +135,7 @@ class UserController extends Controller
             abort(403);
         if ($role == 'super_admin')
             $user->delete();
-        if ($role == 'admin' && $user->user_id == $id)
+        else if ($role == 'admin' && $user->user_id == $id)
             $user->delete();
         else abort(403);
         return redirect()->route('admin.users.index')

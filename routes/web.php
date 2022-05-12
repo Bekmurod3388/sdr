@@ -30,9 +30,9 @@ Auth::routes([
 Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('users', App\Http\Controllers\UserController::class);
-    Route::resource('students', App\Http\Controllers\StudentController::class)->middleware(['admin', 'user']);
-    Route::resource('rooms', App\Http\Controllers\RoomController::class)->middleware(['admin', 'user']);
-    Route::resource('floors', App\Http\Controllers\FloorController::class)->middleware(['admin', 'user']);
+    Route::resource('students', App\Http\Controllers\StudentController::class)->middleware('adminuser');
+    Route::resource('rooms', App\Http\Controllers\RoomController::class)->middleware('adminuser');
+    Route::resource('floors', App\Http\Controllers\FloorController::class)->middleware('adminuser');
     Route::resource('binos', App\Http\Controllers\BinoController::class)->middleware('admin');
     Route::resource('facultets', App\Http\Controllers\FacultetController::class)->middleware('admin');
     Route::resource('attendances', AttendanceController::class)->middleware('user');

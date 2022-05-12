@@ -8,6 +8,7 @@ use App\Models\Room;
 use App\Models\Bino;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BinoController extends Controller
 {
@@ -45,10 +46,10 @@ class BinoController extends Controller
 
     public function store(BinoRequest $request)
     {
-
+        $id = Auth::user()->id;
         $data = new Bino();
         $data->name = $request->name;
-        $data->user_id = $request->user_id;
+        $data->user_id = $id;
         $data->save();
 
         return redirect(route('admin.binos.index'));
@@ -75,7 +76,6 @@ class BinoController extends Controller
 
         $data = Bino::find($id);
         $data->name = $request->name;
-        $data->user_id = $request->user_id;
         $data->save();
 
         return redirect(route('admin.binos.index'));
