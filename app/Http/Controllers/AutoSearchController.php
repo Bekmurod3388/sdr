@@ -11,7 +11,7 @@ class AutoSearchController extends Controller
         if ($request->get('query')){
             $query = $request->get('query');
             $data = DB::table('rooms')
-                ->where('floor', $query)
+                ->where('floor_id', $query)
                 ->get();
             $output='<option value="0" disabled selected >Xonani tanlang</option>';
             foreach ($data as $row){

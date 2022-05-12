@@ -22,13 +22,13 @@
 
 
                     <form action="{{route('admin.attendances.store')}}" method="POST" accept-charset="UTF-8">
-                       @csrf
+                        @csrf
                         <div class="form-group">
                             <label for="building">Bino</label>
                             <select name="building" id="building" class="form-select form-control">
                                 <option value="none">Binoni tanlang</option>
                                 @foreach($buildings as $building)
-                                <option value="{{$building->id}}">{{$building->name}}</option>
+                                    <option value="{{$building->id}}">{{$building->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -37,12 +37,6 @@
                             <label for="floor">Qavat</label>
                             <select name="floor" id="floor" class="form-select form-control">
                                 <option value="none">Qavatni tanlang</option>
-
-
-
-{{--                                <option value="1">1</option>--}}
-{{--                                <option value="2">2</option>--}}
-{{--                                <option value="3">3</option>--}}
                             </select>
                         </div>
 
@@ -55,23 +49,11 @@
 
                         <div class="form-group">
                             <label>Talabalar</label>
-                            <div class="border p-3 d-flex flex-lg-column">
-                                <label for="1" class="form-control d-flex justify-content-between align-items-center">Asadbek
-                                    <input type="checkbox" name="student" value="1" id="1" class="form-check-label">
-                                </label>
-                                <label for="2" class="form-control d-flex justify-content-between align-items-center">Diyorbek
-                                    <input type="checkbox" name="student" value="2" id="2" class="form-check-label">
-                                </label>
-                                <label for="3" class="form-control d-flex justify-content-between align-items-center">Ozodbek
-                                    <input type="checkbox" name="student" value="3" id="3" class="form-check-label">
-                                </label>
-                                <label for="4" class="form-control d-flex justify-content-between align-items-center">Fayzulla
-                                    <input type="checkbox" name="student" value="4" id="4" class="form-check-label">
-                                </label>
+                            <div class="border p-3 d-flex flex-lg-column" id="students">
+
                             </div>
                         </div>
-                        <a href="#" onclick="alert()">saqlash</a>
-                        {{--<button onclick="alert()" class="btn btn-primary">Saqlash</button>--}}
+                        <button type="submit" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
                     </form>
                 </div>
@@ -80,7 +62,7 @@
     </div>
 
     <style>
-        input[type=checkbox]{
+        input[type=checkbox] {
             width: 25px;
             height: 25px;
         }
@@ -91,23 +73,26 @@
         let buildings = @json($buildings);
         let floors = @json($floors);
         let rooms = @json($rooms);
-            $('#building').on('change', function() {
-                var value = $(this).val();
-                $('#floor').empty();
-                for(let i=0; i<floors.length; i++){
-                    if(value == floors[i].bino_id){
-                        var option = document.createElement("option");   // Create with DOM
-                        option.innerHTML = floors[i].floor;
-                        option.value = floors[i].id;
-                         $('#floor').append(option);
-                    }
+        let students = @json($students);
+        $('#building').on('change', function () {
+            var value = $(this).val();
+            $('#floor').empty();
+            $('#floor').append("<option value='none'>Qavatni tanlang</option>")
+            for (let i = 0; i < floors.length; i++) {
+                if (value == floors[i].bino_id) {
+                    var option = document.createElement("option");   // Create with DOM
+                    option.innerHTML = floors[i].floor;
+                    option.value = floors[i].id;
+                    $('#floor').append(option);
                 }
+            }
         });
-        $('#floor').on('change', function() {
+        $('#floor').on('change', function () {
             var room_id = $(this).val();
             $('#room').empty();
-            for(let i=0; i<rooms.length; i++){
-                if(room_id == rooms[i].floor_id){
+            $('#room').append("<option value='none'>Xonani tanlang</option>")
+            for (let i = 0; i < rooms.length; i++) {
+                if (room_id == rooms[i].floor_id) {
                     var option = document.createElement("option");   // Create with DOM
                     option.innerHTML = rooms[i].room_number;
                     option.value = rooms[i].id;
@@ -115,5 +100,22 @@
                 }
             }
         });
+        $('#room').on('change', function () {
+            var student_id = $(this).val();
+            $('#students').empty();
+            for (let i = 0; i < students.length; i++) {
+                if (student_id == students[i].room_id) {
+                    console.log(students[i]);
+                    var label = document.createElement("label"); //Create with DOM
+                    label.innerHTML = students[i].name;
+                    label.className = "form-control d-flex justify-content-between align-items-center";
+                    label.htmlFor = students[i].id;
+                    label.id = 'n' + students[i].id;
+                    $('#students').append(label);
+                    $('#n' + students[i].id).append(`<input type="checkbox" id="${students[i].id}" name="student[]" value="${students[i].id}">`);
+                }
+            }
+        });
+
     </script>
 @endsection

@@ -31,7 +31,7 @@
                         @foreach($data as $post)
                             <tr>
                                 <td scope="row" class="col-1"> {{$post->id}}</td>
-                                <td scope="row" class="col-1">{{$post->bino->name}} </td>
+                                <td>{{$post->bino->name}} </td>
                                 <td>{{$post->floor}}</td>
                                 <td class="col-2">
                                     <form action="{{ route('admin.floors.destroy',$post->id) }}" method="POST">

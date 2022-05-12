@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AttendanceRequest;
 use App\Models\Attendance;
 use App\Models\Bino;
 use App\Models\Floor;
@@ -12,28 +13,49 @@ use Illuminate\Http\Request;
 class AttendanceController extends Controller
 {
 
-    public function index(){
-        $attendances = Attendance::OrderBy('created_at', 'DESC')->get();
+    public function index()
+    {
+        $attendances = Attendance::OrderBy('id', 'DESC')->get();
 //        dd($attendances);
         return view('admin.attendances.index', [
             'attendances' => $attendances
         ]);
     }
 
-    public function create(){
+    public function create()
+    {
         $floors = Floor::all();
         $buildings = Bino::all();
         $students = Student::OrderBy('id', 'DESC')->get();
         $rooms = Room::OrderBy('id')->get();
-        return view('admin.attendances.create',[
+        return view('admin.attendances.create', [
             'students' => $students,
             'rooms' => $rooms,
             'floors' => $floors,
-            'buildings'=>$buildings
+            'buildings' => $buildings
         ]);
     }
 
-    public function store(){
-        dd('store');
+    public function store(AttendanceRequest $request)
+    {
+        $students = Student::where('room_id', $request->room)->get();
+        $room_in_students = count($students);
+        $students_request = $request->student;
+        $cnt = 0;
+        for ($i = 0; $i < $room_in_students; $i++) {
+            $attendance = new Attendance();
+            $attendance['student_id'] = $students[$i]['id'];
+            for ($j = 0; $j < count($students_request); $j++) {
+                if ($students[$i]['id'] == $students_request[$j]) {
+                    $cnt++;
+                }
+            }
+//            dd($cnt);
+            if ($cnt == 0) $attendance['check'] = 0;
+            else $attendance['check'] = 1;
+            $attendance['room_id'] = $request['room'];
+            $attendance->save();
+        }
+        return redirect()->route('admin.attendances.index');
     }
 }
