@@ -45,17 +45,19 @@
                             <input type="checkbox" onclick="myFunction1()" id="chb">
                             <label for="chb">Parolni ko'rsatish</label>
                         </div>
+                        @if(\Illuminate\Support\Facades\Auth::user()->role == 'super_admin')
+                            <div class="form-group">
+                                <label for="role">Role</label>
+                                <select name="role" id="role" class="form-select form-control">
+                                    <option value="admin">admin</option>
+                                    <option value="user">user</option>
+                                </select>
+                            </div>
+                        @endif
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
                     </form>
-{{--                        <form method="post">--}}
-{{--                            Username--}}
-{{--                            <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" required="" id="id_username">--}}
-{{--                            Password--}}
-{{--                            <input type="password" name="password" autocomplete="current-password" required="" id="id_password">--}}
-{{--                            <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>--}}
-{{--                            <button type="submit" class="btn btn-primary">Login</button>--}}
-{{--                        </form>--}}
+
                 </div>
             </div>
         </div>

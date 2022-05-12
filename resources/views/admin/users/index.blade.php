@@ -24,6 +24,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Roli</th>
                             <th scope="col">Harakat</th>
                         </tr>
                         </thead>
@@ -33,9 +34,10 @@
                                 <th scope="row" class="col-1">{{$user->id}}</th>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-
+                                <td>{{$user->role}}</td>
                                 <td class="col-2">
                                     <form action="{{ route('admin.users.destroy',$user->id) }}" method="POST">
+                                        @if(\Illuminate\Support\Facades\Auth::id() == $user->id)
                                         <a class="btn btn-warning btn-sm"
                                            href="{{ route('admin.users.edit',$user->id) }}">
                                     <span class="btn-label">
@@ -43,6 +45,7 @@
                                     </span>
 
                                         </a>
+                                        @endif
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm"><span class="btn-label">

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +18,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
-        return view('admin.users.index')->with('users',$user);
-
+        $role = Auth::user()->role;
+        $id = Auth::user()->id;
+        if ($role == 'super_admin')
+            $user = User::all();
+        if ($role == 'admin')
+            $user = User::where('user_id', $id)->orwhere('id', $id)->get();
+        if ($role == 'user')
+            $user = User::where('id', $id)->get();
+        return view('admin.users.index')->with('users', $user);
     }
 
     /**
@@ -29,31 +36,40 @@ class UserController extends Controller
      */
     public function create()
     {
-        return  view('admin.users.create');
+        return view('admin.users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
     {
-        $user=new User();
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->password=Hash::make($request->password);
+        $role = Auth::user()->role;
+        $id = Auth::user()->id;
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        if ($role == 'super_admin') {
+            $user->role = $request->role;
+            $user->user_id = 1;
+        }
+        if ($role == 'admin') {
+            $user->user_id = $id;
+        }
         $user->save();
 
         return redirect()->route('admin.users.index')
-            ->with('success','Muvaffaqqiyatli yaratildii');
+            ->with('success', 'Muvaffaqqiyatli yaratildii');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,50 +80,61 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit',compact('user'));
+        $id = Auth::user()->id;
+        if ($user->id != $id)
+            abort(403);
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, User $user)
     {
+        $role = Auth::user()->role;
+        $id = Auth::user()->id;
         $request->validate([
             'name' => 'required',
             'email' => 'required',
             'password' => 'required|confirmed|min:8',
-
         ]);
         $user->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password)
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
         ]);
         return redirect()->route('admin.users.index')
-            ->with('success','Muvaffaqqiyatli yangilandi');
+            ->with('success', 'Muvaffaqqiyatli yangilandi');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $user=User::find($id);
-        $user->delete();
+        $role = Auth::user()->role;
+        $id = Auth::user()->id;
+        if ($user->id == $id)
+            abort(403);
+        if ($role == 'super_admin')
+             $user->delete();
+        if($role == 'admin' && $user->user_id == $id)
+            $user->delete();
+        else abort(403);
         return redirect()->route('admin.users.index')
-            ->with('success','Muvaffaqqiyatli o`chirildi');
+            ->with('success', 'Muvaffaqqiyatli o`chirildi');
 
     }
     /*public function logout(Request $request) {

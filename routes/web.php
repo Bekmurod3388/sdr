@@ -38,6 +38,3 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(funct
     Route::resource('attendances', AttendanceController::class);
     Route::view('super','admin.super_admin.index')->name('super');
 });
-
-Route::post('/autoroom', [\App\Http\Controllers\AutoSearchController::class, 'room'])->name('roomauto');
-Route::post('/autostudent',[\App\Http\Controllers\AutoSearchController::class, 'student'])->name('studentauto');
