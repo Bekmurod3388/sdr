@@ -36,6 +36,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        $role = Auth::user()->role;
+        if ($role == 'user')
+            abort(404);
         return view('admin.users.create');
     }
 
@@ -49,6 +52,8 @@ class UserController extends Controller
     {
         $role = Auth::user()->role;
         $id = Auth::user()->id;
+        if ($role == 'user')
+            abort(404);
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -129,8 +134,8 @@ class UserController extends Controller
         if ($user->id == $id)
             abort(403);
         if ($role == 'super_admin')
-             $user->delete();
-        if($role == 'admin' && $user->user_id == $id)
+            $user->delete();
+        if ($role == 'admin' && $user->user_id == $id)
             $user->delete();
         else abort(403);
         return redirect()->route('admin.users.index')

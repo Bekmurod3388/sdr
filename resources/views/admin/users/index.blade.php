@@ -8,12 +8,14 @@
                 <div class="row">
                     <div class="col-9"><h1 class="card-title">Foydalanuvchi</h1></div>
                     <div class="col-md-1">
-                        <a class="btn btn-primary" href="{{route('admin.users.create')}}">
+                        @if(\Illuminate\Support\Facades\Auth::user()->role != 'user')
+                            <a class="btn btn-primary" href="{{route('admin.users.create')}}">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
-                            Qo'shish
-                        </a>
+                                Qo'shish
+                            </a>
+                        @endif
                     </div>
                 </div>
                 <hr>
@@ -38,13 +40,13 @@
                                 <td class="col-2">
                                     <form action="{{ route('admin.users.destroy',$user->id) }}" method="POST">
                                         @if(\Illuminate\Support\Facades\Auth::id() == $user->id)
-                                        <a class="btn btn-warning btn-sm"
-                                           href="{{ route('admin.users.edit',$user->id) }}">
+                                            <a class="btn btn-warning btn-sm"
+                                               href="{{ route('admin.users.edit',$user->id) }}">
                                     <span class="btn-label">
                                         <i class="fa fa-pen"></i>
                                     </span>
 
-                                        </a>
+                                            </a>
                                         @endif
                                         @csrf
                                         @method('DELETE')
