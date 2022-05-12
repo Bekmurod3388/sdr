@@ -33,7 +33,7 @@
                         </a>
                     </li>
                 @endif
-                @if(\Illuminate\Support\Facades\Auth::user()->role == 'user')
+                @if(\Illuminate\Support\Facades\Auth::user()->role != 'super_admin')
                     <li class="nav-item {{  request()->routeIs('admin.floors.index') ? 'active' : '' }}">
                         <a href="{{route('admin.floors.index')}}">
                             <i class="fas fa-door-closed"></i>
@@ -47,7 +47,8 @@
                             <p>Xonalar</p>
                         </a>
                     </li>
-
+                @endif
+                @if(\Illuminate\Support\Facades\Auth::user()->role == 'user')
                     <li class="nav-item {{  request()->routeIs('admin.attendances.index') ? 'active' : '' }}">
                         <a href="{{route('admin.attendances.index')}}">
                             <i class="fas fa-address-book"></i>
