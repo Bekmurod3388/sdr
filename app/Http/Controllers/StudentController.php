@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bino;
 use App\Models\Fakultet;
+use App\Models\Floor;
 use App\Models\Room;
 use App\Models\Student;
 use App\Rules\PassportNumber;
 use App\Rules\PhoneNumber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class StudentController
@@ -15,34 +18,54 @@ class StudentController
 
     public function index()
     {
-        $post = Student::paginate(15);
+        $role = Auth::user()->role;
+        if ($role == 'admin')
+            $id = Auth::user()->id;
+        elseif ($role == 'user')
+            $id = Auth::user()->user_id;
+        $post = Student::where('user_id', $id)->paginate(15);
+//        $post = Student::paginate(15);
         return view('admin.students.index', ["posts" => $post]);
     }
 
     public function create()
     {
+        $role = Auth::user()->role;
+        if ($role == 'admin')
+            $id = Auth::user()->id;
+        elseif ($role == 'user')
+            $id = Auth::user()->user_id;
+        $floors = Floor::all();
+        $buildings = Bino::where('user_id', $id)->get();
         $rooms = Room::whereColumn('busy', '<', 'count')->get();
-        $fak = Fakultet::all();
+        $fak = Fakultet::where('user_id', $id)->get();
 
         return view('admin.students.create', [
             "rooms" => $rooms,
-            "fakultets" => $fak
+            "fakultets" => $fak,
+            'buildings' => $buildings,
+            'floors' => $floors,
         ]);
     }
 
     public function store(Request $request)
     {
-        $request=$request->validate([
-            "name"=>'required ',
-            "surname"=>'required ',
-            "f_s_name"=>'required ',
-            "address"=>'required ',
-            "phone"=>['required',new PhoneNumber],
-            "passport"=>['required',new PassportNumber],
-            "parent_name"=>'required ',
-            "parent_phone"=>['required',new PhoneNumber],
-            "room_id"=>'required',
-            "fak_id"=>'required'
+        $role = Auth::user()->role;
+        if ($role == 'admin')
+            $id = Auth::user()->id;
+        elseif ($role == 'user')
+            $id = Auth::user()->user_id;
+        $request = $request->validate([
+            "name" => 'required ',
+            "surname" => 'required ',
+            "f_s_name" => 'required ',
+            "address" => 'required ',
+            "phone" => ['required', new PhoneNumber],
+            "passport" => ['required', new PassportNumber],
+            "parent_name" => 'required ',
+            "parent_phone" => ['required', new PhoneNumber],
+            "room_id" => 'required',
+            "fak_id" => 'required'
         ]);
 
         $data = new Student();
@@ -56,6 +79,7 @@ class StudentController
         $data->parent_phone = $request['parent_phone'];
         $data->room_id = $request['room_id'];
         $data->fak_id = $request['fak_id'];
+        $data->user_id = $id;
         $data->save();
         //busy++
         $id = $request['room_id'];
@@ -85,17 +109,17 @@ class StudentController
 
     public function update(Request $request, $id)
     {
-        $request=$request->validate([
-            "name"=>'required ',
-            "surname"=>'required ',
-            "f_s_name"=>'required ',
-            "address"=>'required ',
-            "phone"=>['required',new PhoneNumber],
-            "passport"=>['required',new PassportNumber],
-            "parent_name"=>'required ',
-            "parent_phone"=>['required',new PhoneNumber],
-            "room_id"=>'required',
-            "fak_id"=>'required'
+        $request = $request->validate([
+            "name" => 'required ',
+            "surname" => 'required ',
+            "f_s_name" => 'required ',
+            "address" => 'required ',
+            "phone" => ['required', new PhoneNumber],
+            "passport" => ['required', new PassportNumber],
+            "parent_name" => 'required ',
+            "parent_phone" => ['required', new PhoneNumber],
+            "room_id" => 'required',
+            "fak_id" => 'required'
         ]);
         $data = Student::find($id);
         $data->name = $request['name'];
@@ -117,6 +141,7 @@ class StudentController
             $data->room_id = $request['room_id'];
         }
         $data->fak_id = $request['fak_id'];
+        $data->
         $data->save();
 
         return redirect(route('admin.students.index'));

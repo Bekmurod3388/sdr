@@ -65,12 +65,26 @@
                                    placeholder="+998883621700" value="{{old('parent_phone')}}">
                         </div>
                         <div class="form-group">
-                            <select name="room_id" required class="form-select form-control form-select-lg mb-3"
-                                    aria-label=".form-select-lg example">
-                                <option value="" selected>Xonani tanlang</option>
-                                @foreach($rooms as $room)
-                                    <option value="{{$room->id}}">{{$room->room_number}}</option>
+                            <label for="building">Bino</label>
+                            <select name="building" id="building" class="form-select form-control">
+                                <option value="none">Binoni tanlang</option>
+                                @foreach($buildings as $building)
+                                    <option value="{{$building->id}}">{{$building->name}}</option>
                                 @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="floor">Qavat</label>
+                            <select name="floor" id="floor" class="form-select form-control">
+                                <option value="none">Qavatni tanlang</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select id="room" name="room_id" required
+                                    class="form-select form-control form-select-lg mb-3">
+                                <option value="none" selected>Xonani tanlang</option>
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -92,4 +106,40 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+
+        let buildings = @json($buildings);
+        let floors = @json($floors);
+        let rooms = @json($rooms);
+
+        $('#building').on('change', function () {
+            var value = $(this).val();
+            $('#floor').empty();
+            $('#floor').append("<option value='none'>Qavatni tanlang</option>")
+            for (let i = 0; i < floors.length; i++) {
+                if (value == floors[i].bino_id) {
+                    var option = document.createElement("option");   // Create with DOM
+                    option.innerHTML = floors[i].floor;
+                    option.value = floors[i].id;
+                    $('#floor').append(option);
+                }
+            }
+        });
+        $('#floor').on('change', function () {
+            var room_id = $(this).val();
+            $('#room').empty();
+            $('#room').append("<option value='none'>Xonani tanlang</option>")
+            for (let i = 0; i < rooms.length; i++) {
+                if (room_id == rooms[i].floor_id) {
+                    var option = document.createElement("option");   // Create with DOM
+                    option.innerHTML = rooms[i].room_number;
+                    option.value = rooms[i].id;
+                    $('#room').append(option);
+                }
+            }
+        });
+
+    </script>
 @endsection

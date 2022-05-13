@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('student_id');
             $table->integer('room_id');
+            $table->integer('user_id');
             $table->tinyInteger('check')->default(0);
             $table->timestamps();
         });

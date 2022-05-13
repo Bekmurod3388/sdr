@@ -54,9 +54,11 @@ class FloorController extends Controller
     public function create()
     {
         $role = Auth::user()->role;
-        $id = Auth::user()->id;
-        $creater = Auth::user()->user_id;
-        $buildings = Bino::where('user_id', $creater)->get();
+        if ($role == 'admin')
+            $id = Auth::user()->id;
+        elseif ($role == 'user')
+            $id = Auth::user()->user_id;
+        $buildings = Bino::where('user_id', $id)->get();
         return view('admin.floors.addfloor', ['buildings' => $buildings]);
     }
 

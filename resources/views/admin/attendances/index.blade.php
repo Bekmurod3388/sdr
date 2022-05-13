@@ -7,12 +7,14 @@
                 <div class="row">
                     <div class="col-9"><h1 class="card-title">Davomat</h1></div>
                     <div class="col-md-1">
-                        <a class="btn btn-primary" href="{{route('admin.attendances.create')}}">
+                        @if(\Illuminate\Support\Facades\Auth::user()->role != 'admin')
+                            <a class="btn btn-primary" href="{{route('admin.attendances.create')}}">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
-                            Davomat olish
-                        </a>
+                                Davomat olish
+                            </a>
+                        @endif
                     </div>
                 </div>
                 <hr>
@@ -44,6 +46,19 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="container">
+                        <div class="row justify-content-center">
+
+
+                            @if ($attendances->links())
+                                <div class="mt-4 p-4 box has-text-centered">
+                                    {{ $attendances->links() }}
+                                </div>
+                            @endif
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

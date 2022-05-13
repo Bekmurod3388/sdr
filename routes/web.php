@@ -35,5 +35,5 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(funct
     Route::resource('floors', App\Http\Controllers\FloorController::class)->middleware('adminuser');
     Route::resource('binos', App\Http\Controllers\BinoController::class)->middleware('admin');
     Route::resource('facultets', App\Http\Controllers\FacultetController::class)->middleware('admin');
-    Route::resource('attendances', AttendanceController::class)->middleware('user');
+    Route::resource('attendances', AttendanceController::class)->middleware('adminuser');
 });
