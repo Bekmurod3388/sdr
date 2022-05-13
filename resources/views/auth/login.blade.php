@@ -6,7 +6,14 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
+{{--                @if( request()->get('a') )--}}
+{{--                    <script>console.log('hello')</script>--}}
+{{--                @endif--}}
+{{--                @if ($message != NULL)--}}
+{{--                    <div class="alert alert-info">{{ app('request')->input('message')  }}--}}
+{{--                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

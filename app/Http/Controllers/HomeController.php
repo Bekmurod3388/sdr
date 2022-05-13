@@ -30,7 +30,7 @@ class HomeController extends Controller
         else {
 //            abort(404);
             Auth::logout();
-            return redirect('/login');
+            return redirect('/login')->with('warning', 'You have been logged out!');
         }
     }
 }
