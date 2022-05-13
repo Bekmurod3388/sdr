@@ -48,7 +48,7 @@
                         </a>
                     </li>
                 @endif
-                @if(\Illuminate\Support\Facades\Auth::user()->role != 'superadmin')
+                @if(\Illuminate\Support\Facades\Auth::user()->role != 'super_admin')
                     <li class="nav-item {{  request()->routeIs('admin.attendances.index') ? 'active' : '' }}">
                         <a href="{{route('admin.attendances.index')}}">
                             <i class="fas fa-address-book"></i>
