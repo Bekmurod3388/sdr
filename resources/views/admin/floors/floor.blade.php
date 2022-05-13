@@ -57,15 +57,15 @@
                     </table>
                     <section class="content12 cid-t34gh8nW7r" id="content12-2s">
 
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                @if ($data->links())
-                                    <div class="mt-4 p-4 box has-text-centered">
-                                        {{ $data->links() }}
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
+{{--                        <div class="container">--}}
+{{--                            <div class="row justify-content-center">--}}
+{{--                                @if ($data->links())--}}
+{{--                                    <div class="mt-4 p-4 box has-text-centered">--}}
+{{--                                        {{ $data->links() }}--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </section>
                 </div>
             </div>

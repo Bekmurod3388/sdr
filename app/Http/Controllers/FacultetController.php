@@ -6,6 +6,7 @@ use App\Http\Requests\FakultetRequest;
 use App\Models\Fakultet;
 use App\Models\StudentInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FacultetController extends Controller
 {
@@ -21,7 +22,8 @@ class FacultetController extends Controller
      */
     public function index()
     {
-        $posts=Fakultet::all();
+        $id = Auth::user()->id;
+        $posts=Fakultet::where('user_id', $id)->get();
         return view('admin.facultets.index',[
             'posts'=>$posts
         ]);
@@ -45,8 +47,10 @@ class FacultetController extends Controller
      */
     public function store(FakultetRequest $request)
     {
+        $id = Auth::user()->id;
         $data=new Fakultet();
         $data->name=$request->name;
+        $data->user_id=$id;
         $data->save();
         return redirect(route('admin.facultets.index'));
     }
@@ -68,7 +72,7 @@ class FacultetController extends Controller
      * @param  \App\Models\StudentInfo  $studentinfo
      * @return \Illuminate\Http\Response
      */
-    public function edit(StudentInfo $studentinfo,$id)
+    public function edit($id)
     {
         $post=Fakultet::find($id);
         return view('admin.facultets.edit',[

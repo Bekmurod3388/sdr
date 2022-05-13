@@ -14,4 +14,8 @@ class Floor extends Model
         return $this->belongsTo(Bino::class);
     }
 
+    public function rooms(){
+        return $this->hasMany(Room::class);
+    }
+
 }

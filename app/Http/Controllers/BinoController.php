@@ -21,13 +21,19 @@ class BinoController extends Controller
 
     public function index()
     {
-
-        $data = Bino::all();
-        $users = User::all();
-
-        return view('admin.binos.bino' , [
-            'data'=>$data,
-            'users'=>$users
+        $role = Auth::user()->role;
+        $id = Auth::user()->id;
+       if ($role == 'admin') {
+            $users_id = Bino::where('user_id', $id)->get();
+            $users = [0];
+            if (!empty($users_id)) {
+                foreach ($users_id as $id => $value)
+                    $users[$id] = $value['user_id'];
+                $data = Bino::whereIn('user_id', $users)->get();
+            } else $data = Bino::all();
+        }
+        return view('admin.binos.bino', [
+            'data' => $data,
         ]);
 
     }
@@ -36,8 +42,8 @@ class BinoController extends Controller
     {
         $users = User::all();
 
-        return view('admin.binos.addbino' , [
-            'users'=>$users
+        return view('admin.binos.addbino', [
+            'users' => $users
         ]);
 
 
@@ -62,10 +68,10 @@ class BinoController extends Controller
         $isUser = User::find($data->user_id);
         $users = User::all();
 
-        return view('admin.binos.editbino' , [
-            'data'=>$data,
-            'isUser'=>$isUser,
-            'users'=>$users
+        return view('admin.binos.editbino', [
+            'data' => $data,
+            'isUser' => $isUser,
+            'users' => $users
         ]);
 
     }
