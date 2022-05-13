@@ -30,6 +30,7 @@ Auth::routes([
 Route::prefix('admin')->name('admin.')->middleware(['web', 'auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::get('user/status/{user}', [\App\Http\Controllers\UserController::class, 'status'])->name('user.status')->middleware('super_admin');
     Route::resource('students', App\Http\Controllers\StudentController::class)->middleware('adminuser');
     Route::resource('rooms', App\Http\Controllers\RoomController::class)->middleware('adminuser');
     Route::resource('floors', App\Http\Controllers\FloorController::class)->middleware('adminuser');

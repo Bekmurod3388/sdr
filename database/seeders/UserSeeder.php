@@ -16,39 +16,44 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name'=>'admin',
-            'email'=>'superadmin@gmail.com',
-            'password'=>Hash::make('admin'),
+            'name' => 'admin',
+            'email' => 'superadmin@gmail.com',
+            'password' => Hash::make('admin'),
             'role' => 'super_admin',
             'user_id' => 1,
+            'status' => 1
         ]);
         DB::table('users')->insert([
-            'name'=>'Asadbek',
-            'email'=>'asadbek.polatov.02@mail.ru',
-            'password'=>Hash::make('123456789'),
+            'name' => 'Asadbek',
+            'email' => 'asadbek.polatov.02@mail.ru',
+            'password' => Hash::make('123456789'),
             'role' => 'admin',
             'user_id' => 1,
+            'status' => 1
         ]);
         DB::table('users')->insert([
-            'name'=>'Beksulton',
-            'email'=>'beksulton1112@gmail.com',
-            'password'=>Hash::make('123456789'),
+            'name' => 'Beksulton',
+            'email' => 'beksulton1112@gmail.com',
+            'password' => Hash::make('123456789'),
             'role' => 'admin',
             'user_id' => 1,
+            'status' => 1
         ]);
         DB::table('users')->insert([
-            'name'=>'Fayzulla',
-            'email'=>'fayzulla@gmail.com',
-            'password'=>Hash::make('123456789'),
+            'name' => 'Fayzulla',
+            'email' => 'fayzulla@gmail.com',
+            'password' => Hash::make('123456789'),
             'role' => 'user',
             'user_id' => 2,
+            'status' => 1
         ]);
         DB::table('users')->insert([
-            'name'=>'Sanjar',
-            'email'=>'sanjar@gmail.com',
-            'password'=>Hash::make('123456789'),
+            'name' => 'Sanjar',
+            'email' => 'sanjar@gmail.com',
+            'password' => Hash::make('123456789'),
             'role' => 'user',
             'user_id' => 3,
+            'status' => 1
         ]);
 //        DB::table('users')->insert([
 //            'name'=>'admin',

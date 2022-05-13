@@ -21,7 +21,7 @@ class UserController extends Controller
         $role = Auth::user()->role;
         $id = Auth::user()->id;
         if ($role == 'super_admin')
-            $user = User::all();
+            $user = User::where('role', '!=', 'user')->get();
         if ($role == 'admin')
             $user = User::where('user_id', $id)->orwhere('id', $id)->get();
         if ($role == 'user')
@@ -59,7 +59,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         if ($role == 'super_admin') {
-            $user->role = $request->role;
+            $user->role = 'admin';
             $user->user_id = 1;
         }
         if ($role == 'admin') {
@@ -142,6 +142,20 @@ class UserController extends Controller
             ->with('success', 'Muvaffaqqiyatli o`chirildi');
 
     }
+
+    public function status(User $user)
+    {
+        if ($user->status == 0) $status = 1;
+        else $status = 0;
+        $users = User::Where('user_id', $user->id)->update([
+            'status' => $status
+        ]);
+        $users = User::Where('id', $user->id)->update([
+            'status' => $status
+        ]);
+        return redirect()->route('admin.users.index');
+    }
+
     /*public function logout(Request $request) {
         Auth::logout();
         return redirect('/login');

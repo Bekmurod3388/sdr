@@ -20,13 +20,16 @@
                 </div>
                 <hr>
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered text-center">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Username</th>
                             <th scope="col">Email</th>
                             <th scope="col">Roli</th>
+                            @if(\Illuminate\Support\Facades\Auth::user()->role == 'super_admin')
+                                <th scope="col">Status</th>
+                            @endif
                             <th scope="col">Harakat</th>
                         </tr>
                         </thead>
@@ -37,23 +40,36 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->role}}</td>
-                                <td class="col-2">
-                                    <form action="{{ route('admin.users.destroy',$user->id) }}" method="POST">
-                                        @if(\Illuminate\Support\Facades\Auth::id() == $user->id)
-                                            <a class="btn btn-warning btn-sm"
-                                               href="{{ route('admin.users.edit',$user->id) }}">
-                                    <span class="btn-label">
-                                        <i class="fa fa-pen"></i>
-                                    </span>
-
-                                            </a>
+                                @if(\Illuminate\Support\Facades\Auth::user()->role == 'super_admin')
+                                    <td>
+                                        @if ($user->role != 'super_admin')
+                                            @if($user->status == 0)
+                                                <a href="{{ route('admin.user.status', ['user' => $user->id]) }}" class="btn btn-danger">ON</a>
+                                            @else
+                                                <a href="{{ route('admin.user.status', ['user' => $user->id]) }}" class="btn btn-success">OFF</a>
+                                            @endif
                                         @endif
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"><span class="btn-label">
-                                        <i class="fa fa-trash"></i>
-                                    </span></button>
-                                    </form>
+                                    </td>
+                                @endif
+                                <td class="col-2">
+                                    @if(\Illuminate\Support\Facades\Auth::id() == $user->id)
+                                        <a class="btn btn-warning btn-sm"
+                                           href="{{ route('admin.users.edit',$user->id) }}">
+                                            <span class="btn-label">
+                                                <i class="fa fa-pen"></i>
+                                            </span>
+                                        </a>
+                                    @else
+                                        <form action="{{ route('admin.users.destroy',$user->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <span class="btn-label">
+                                                    <i class="fa fa-trash"></i>
+                                                </span>
+                                            </button>
+                                        </form>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
