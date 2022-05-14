@@ -22,7 +22,7 @@
 
 
                     <form action="{{route('admin.students.update',$data->id)}}" method="POST" accept-charset="UTF-8"
-                          enctype="multipart/form-data">
+                          >
                         @method('PUT')
                         @csrf
                         <div class="form-group">
