@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('role')->default('user');
             $table->integer('user_id');
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

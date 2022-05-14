@@ -31,10 +31,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($attendances as $attendance)
+                        @foreach($attendances as $key => $attendance)
                             @if($attendance->check == 1)
                                 <tr>
-                                    <th scope="row" class="col-1">{{ $attendance->id}}</th>
+                                    <th scope="row" class="col-1">{{ $key+1 }}</th>
                                     <td>{{ $attendance->student->name }}</td>
                                     <td>{{ $attendance->room->room_number }}</td>
                                     @if($attendance->check == 1)

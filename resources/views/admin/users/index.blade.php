@@ -34,9 +34,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
+                        @foreach($users as $key => $user)
                             <tr>
-                                <th scope="row" class="col-1">{{$user->id}}</th>
+                                <th scope="row" class="col-1">{{ $key+1 }}</th>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->role}}</td>
@@ -44,9 +44,9 @@
                                     <td>
                                         @if ($user->role != 'super_admin')
                                             @if($user->status == 0)
-                                                <a href="{{ route('admin.user.status', ['user' => $user->id]) }}" class="btn btn-danger">ON</a>
+                                                <a href="{{ route('admin.user.status', ['user' => $user->id]) }}" class="btn btn-danger">Yoqish</a>
                                             @else
-                                                <a href="{{ route('admin.user.status', ['user' => $user->id]) }}" class="btn btn-success">OFF</a>
+                                                <a href="{{ route('admin.user.status', ['user' => $user->id]) }}" class="btn btn-success">O'chirish</a>
                                             @endif
                                         @endif
                                     </td>

@@ -20,7 +20,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th scope="col">Id</th>
+                            <th scope="col">#</th>
                             <th scope="col">Xona raqami</th>
                             <th scope="col">Joylar soni</th>
                             <th scope="col">Qavati</th>
@@ -34,8 +34,7 @@
                             @foreach($floors as $floor)
                                 @if( $post['floor_id']==$floor['id'] )
                                     <tr>
-                                        <th scope="row"
-                                            class="col-1"> {{$post->id}} </th>
+                                        <th scope="row" class="col-1"> {{$ind+1}} </th>
                                         <td>{{$post->room_number}}</td>
                                         <td>{{$post->count}}</td>
                                         <td>{{$floor->floor}}</td>

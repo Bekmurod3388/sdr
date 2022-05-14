@@ -19,16 +19,16 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>Nomi</th>
                             <th>Amal</th>
 
                          </tr>
                         </thead>
                         <tbody>
-                        @foreach($posts as $post)
+                        @foreach($posts as $key => $post)
                             <tr>
-                                <td  class="col-2">{{$post->id}}</td>
+                                <td  class="col-2">{{$key+1}}</td>
                                 <td class="col-8">{{$post->name}}</td>
 
 

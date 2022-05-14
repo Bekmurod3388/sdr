@@ -20,7 +20,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th scope="col">Id</th>
+                            <th scope="col">#</th>
                             <th scope="col">Bino nomi</th>
                             <th scope="col">Qavat raqami</th>
                             <th scope="col">Ammallar</th>
@@ -28,9 +28,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($data as $post)
+                        @foreach($data as $key => $post)
                             <tr>
-                                <td scope="row" class="col-1"> {{$post->id}}</td>
+                                <td scope="row" class="col-1"> {{$key+1}}</td>
                                 <td>{{$post->bino->name}} </td>
                                 <td>{{$post->floor}}</td>
                                 <td class="col-2">

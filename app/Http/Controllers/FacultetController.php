@@ -106,7 +106,7 @@ class FacultetController extends Controller
      * @param  \App\Models\StudentInfo  $studentinfo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StudentInfo $studentinfo,$id)
+    public function destroy($id)
     {
         $data=Fakultet::find($id);
         $data->delete();

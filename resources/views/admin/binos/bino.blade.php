@@ -20,7 +20,7 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th scope="col">Id</th>
+                            <th scope="col">#</th>
                             <th scope="col">Bino nomi</th>
                             <th scope="col">Foydalanuvchi Id</th>
                             <th scope="col">Ammallar</th>
@@ -31,11 +31,11 @@
 
                         <?php $id = 0; ?>
 
-                        @foreach($data as $post)
+                        @foreach($data as $key => $post)
                             <?php $id++; ?>
                             <tr>
 
-                                <th scope="row" class="col-1"> <?php echo $id; ?> </th>
+                                <th scope="row" class="col-1"> {{ $key+1 }} </th>
                                 <td>{{$post->name}}</td>
                                 <td>{{$post->user_id}}</td>
 

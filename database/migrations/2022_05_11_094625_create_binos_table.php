@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('binos', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->integer('user_id')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
