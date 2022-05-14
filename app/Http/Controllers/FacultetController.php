@@ -23,7 +23,7 @@ class FacultetController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-        $posts=Fakultet::where('user_id', $id)->get();
+        $posts=Fakultet::where('user_id', $id)->paginate(5);
         return view('admin.facultets.index',[
             'posts'=>$posts
         ]);
@@ -36,7 +36,11 @@ class FacultetController extends Controller
      */
     public function create()
     {
-        return view('admin.facultets.create');
+        $id = Auth::user()->id;
+        $facultets = Fakultet::where('user_id', $id)->get();
+        return view('admin.facultets.create',[
+            'facultets' => $facultets
+        ]);
     }
 
     /**
@@ -74,9 +78,12 @@ class FacultetController extends Controller
      */
     public function edit($id)
     {
+        $auth_id = Auth::user()->id;
+        $facultets = Fakultet::where('user_id', $auth_id)->get();
         $post=Fakultet::find($id);
         return view('admin.facultets.edit',[
-            'post'=>$post
+            'post'=>$post,
+            'facultets' => $facultets
         ]);
     }
 
@@ -93,11 +100,7 @@ class FacultetController extends Controller
         $post->id=$id;
         $post->name=$request->name;
         $post->save();
-
-        $posts=Fakultet::all();
-        return view('admin.facultets.index',[
-            'posts'=>$posts
-        ]);
+        return redirect()->route('admin.facultets.index');
     }
 
     /**

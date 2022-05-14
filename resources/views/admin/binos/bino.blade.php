@@ -22,7 +22,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Bino nomi</th>
-                            <th scope="col">Foydalanuvchi Id</th>
+                            {{--                            <th scope="col">Foydalanuvchi Id</th>--}}
                             <th scope="col">Ammallar</th>
 
                         </tr>
@@ -37,7 +37,7 @@
 
                                 <th scope="row" class="col-1"> {{ $key+1 }} </th>
                                 <td>{{$post->name}}</td>
-                                <td>{{$post->user_id}}</td>
+                                {{--                                <td>{{$post->user_id}}</td>--}}
 
                                 <td class="col-2">
                                     <form action="{{ route('admin.binos.destroy',$post->id) }}" method="POST">
@@ -63,6 +63,19 @@
 
                         </tbody>
                     </table>
+                    <div class="container">
+                        <div class="row justify-content-center">
+
+
+                            @if ($data->links())
+                                <div class="mt-4 p-4 box has-text-centered">
+                                    {{ $data->links() }}
+                                </div>
+                            @endif
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

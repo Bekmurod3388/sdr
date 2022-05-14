@@ -21,14 +21,15 @@
                     @endif
 
 
-                    <form action="{{route('admin.facultets.update',$post->id)}}" method="POST" name="id" accept-charset="UTF-8" enctype="multipart/form-data">
+                    <form action="{{route('admin.facultets.update',$post->id)}}" method="POST" id="myForm">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
                             <label for="description_ru">Fakultet</label>
-                            <input type="text" name="name" class="form-control" id="header_ru" placeholder="Fakultet" value="{{$post->name}}">
+                            <input type="text" name="name" class="form-control" id="header_ru" placeholder="Fakultet"
+                                   value="{{$post->name}}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Saqlash</button>
+                        <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
                     </form>
 
@@ -38,4 +39,36 @@
         </div>
     </div>
 
+@endsection
+@section('script')
+    <script>
+        let facultets = @json($facultets);
+        $(document).on('click', '#alert', function (e) {
+            e.preventDefault();
+            let cnt = 0;
+            var value = $('#header_ru').val();
+            if (facultets.length == 0) $('#myForm').submit();
+            for (let i = 0; i < facultets.length; i++) {
+                if (value == facultets[i].name && value != @json($post->name)) {
+                    cnt++;
+                }
+            }
+            if (cnt > 0) {
+                swal({
+                    icon: 'error',
+                    title: 'Xatolik',
+                    text: 'Bu fakultet oldin kiritilgan',
+                    confirmButtonText: 'Continue',
+                })
+                $('#header_ru').val(@json($post->name));
+            } else if ($('#header_ru').val() != '') {
+                swal({
+                    icon: 'success',
+                    text: 'Fakultet o`zgartirildi',
+                    confirmButtonText: 'Continue',
+                })
+                $('#myForm').submit();
+            } else $('#myForm').submit();
+        });
+    </script>
 @endsection

@@ -51,6 +51,19 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="container">
+                        <div class="row justify-content-center">
+
+
+                            @if ($posts->links())
+                                <div class="mt-4 p-4 box has-text-centered">
+                                    {{ $posts->links() }}
+                                </div>
+                            @endif
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

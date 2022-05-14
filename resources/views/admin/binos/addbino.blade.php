@@ -21,14 +21,12 @@
                     @endif
 
 
-                    <form action="{{route('admin.binos.store')}}" method="POST" accept-charset="UTF-8"
-
-                          enctype="multipart/form-data">
+                    <form action="{{route('admin.binos.store')}}" method="POST" accept-charset="UTF-8" id="myForm">
                         @csrf
 
                         <div class="form-group">
                             <label for="header_ru"> Bino nomi </label>
-                            <input type="text" name="name" class="form-control" placeholder=" kiriting.. ">
+                            <input type="text" name="name" class="form-control" placeholder=" kiriting.. " id="bino">
                         </div>
 
 
@@ -41,4 +39,37 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script>
+        let facultets = @json($facultets);
+        $(document).on('click', '#alert', function (e) {
+            e.preventDefault();
+            let cnt = 0;
+            var value = $('#bino').val();
+            if (facultets.length == 0) $('#myForm').submit();
+            for (let i = 0; i < facultets.length; i++) {
+                if (value == facultets[i].name) {
+                    cnt++;
+                }
+            }
+            if (cnt > 0) {
+                swal({
+                    icon: 'error',
+                    title: 'Xatolik',
+                    text: 'Bu bino oldin kiritilgan',
+                    confirmButtonText: 'Continue',
+                })
+                $('#bino').val('');
+            } else if ($('#bino').val() != '') {
+                swal({
+                    icon: 'success',
+                    text: 'Bino yaratildi',
+                    confirmButtonText: 'Continue',
+                })
+                $('#myForm').submit();
+            } else $('#myForm').submit();
+        });
+    </script>
 @endsection

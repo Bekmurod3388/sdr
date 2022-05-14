@@ -21,8 +21,7 @@
                     @endif
 
 
-                    <form action="{{route('admin.facultets.store')}}" method="POST" accept-charset="UTF-8"
-                          enctype="multipart/form-data">
+                    <form action="{{route('admin.facultets.store')}}" method="POST" accept-charset="UTF-8" id="myForm">
                         @csrf
                         <div class="form-group">
                             <label for="header_ru">Fakultet</label>
@@ -41,4 +40,35 @@
 
 
 @endsection
-
+@section('script')
+    <script>
+        let facultets = @json($facultets);
+        $(document).on('click', '#alert', function (e) {
+            e.preventDefault();
+            let cnt = 0;
+            var value = $('#header_ru').val();
+            if (facultets.length == 0) $('#myForm').submit();
+            for (let i = 0; i < facultets.length; i++) {
+                if (value == facultets[i].name) {
+                    cnt++;
+                }
+            }
+            if (cnt > 0) {
+                swal({
+                    icon: 'error',
+                    title: 'Xatolik',
+                    text: 'Bu fakultet oldin kiritilgan',
+                    confirmButtonText: 'Continue',
+                })
+                $('#header_ru').val('');
+            } else if ($('#header_ru').val() != '') {
+                swal({
+                    icon: 'success',
+                    text: 'Fakultet yaratildi',
+                    confirmButtonText: 'Continue',
+                })
+                $('#myForm').submit();
+            } else $('#myForm').submit();
+        });
+    </script>
+@endsection

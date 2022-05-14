@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BinoRequest;
+use App\Models\Fakultet;
 use App\Models\Floor;
 use App\Models\Room;
 use App\Models\Bino;
@@ -24,13 +25,7 @@ class BinoController extends Controller
         $role = Auth::user()->role;
         $id = Auth::user()->id;
        if ($role == 'admin') {
-            $users_id = Bino::where('user_id', $id)->get();
-            $users = [0];
-            if (!empty($users_id)) {
-                foreach ($users_id as $id => $value)
-                    $users[$id] = $value['user_id'];
-                $data = Bino::whereIn('user_id', $users)->get();
-            } else $data = Bino::all();
+            $data = Bino::where('user_id', $id)->paginate(5);
         }
         return view('admin.binos.bino', [
             'data' => $data,
@@ -40,13 +35,11 @@ class BinoController extends Controller
 
     public function create()
     {
-        $users = User::all();
-
+        $id = Auth::user()->id;
+        $facultets = Bino::where('user_id', $id)->get();
         return view('admin.binos.addbino', [
-            'users' => $users
+            'facultets' => $facultets
         ]);
-
-
     }
 
 
@@ -63,15 +56,18 @@ class BinoController extends Controller
 
     public function edit($id)
     {
+        $auth_id = Auth::user()->id;
+        $facultets = Bino::where('user_id', $auth_id)->get();
 
         $data = Bino::find($id);
-        $isUser = User::find($data->user_id);
-        $users = User::all();
+//        $isUser = User::find($data->user_id);
+//        $users = User::all();
 
         return view('admin.binos.editbino', [
             'data' => $data,
-            'isUser' => $isUser,
-            'users' => $users
+//            'isUser' => $isUser,
+//            'users' => $users,
+            'facultets' => $facultets
         ]);
 
     }
