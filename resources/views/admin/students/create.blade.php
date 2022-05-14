@@ -21,8 +21,7 @@
                     @endif
 
 
-                    <form action="{{route('admin.students.store')}}" method="POST" accept-charset="UTF-8"
-                          enctype="multipart/form-data">
+                    <form action="{{route('admin.students.store')}}" method="POST" accept-charset="UTF-8">
                         @csrf
                         <div class="form-group">
                             <label for="header_ru">Ismni kiriting</label>
