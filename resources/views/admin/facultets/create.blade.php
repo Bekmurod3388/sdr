@@ -24,13 +24,13 @@
                     <form action="{{route('admin.facultets.store')}}" method="POST" accept-charset="UTF-8" id="myForm">
                         @csrf
                         <div class="form-group">
-                            <label for="header_ru">Fakultet</label>
+                            <label for="header_ru">Fakultet nomi</label>
                             <input type="text" name="name" class="form-control" id="header_ru" placeholder="Fakultet">
                         </div>
 
 
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
-                        <input type="reset" class="btn btn-danger" value="Очистить">
+                        <input type="reset" class="btn btn-danger" value="Tozalash">
                     </form>
                 </div>
             </div>
