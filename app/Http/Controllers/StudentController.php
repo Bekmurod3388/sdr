@@ -73,7 +73,7 @@ class StudentController
         $d = Room::find($id);
         $d->busy += 1;
         $d->save();
-        return redirect(route('admin.students.index'));
+        return redirect(route('admin.students.index'))->with('success', 'Muvaffaqqiyatli yaratildi');
     }
 
     public function edit($id)
@@ -128,10 +128,10 @@ class StudentController
             $data->room_id = $request['room_id'];
         }
         $data->fak_id = $request['fak_id'];
-        $data->
+
         $data->save();
 
-        return redirect(route('admin.students.index'));
+        return redirect(route('admin.students.index'))->with('success', 'Muvaffaqqiyatli yangilandi');
     }
 
     public function show($id)
@@ -157,7 +157,7 @@ class StudentController
         $room->save();
         $data->delete();
 
-        return redirect(route('admin.students.index'));
+        return redirect(route('admin.students.index'))->with('success', 'Muvaffaqqiyatli o\'chirildi');
 
     }
 

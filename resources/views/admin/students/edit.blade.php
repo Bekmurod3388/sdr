@@ -9,16 +9,7 @@
                 <hr>
                 <div class="card-body">
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <strong>Xatolik!</strong> Quyidagi shartlar bajarilishi lozim !<br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+
 
 
                     <form action="{{route('admin.students.update',$data->id)}}" method="POST" accept-charset="UTF-8"
@@ -99,5 +90,31 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+
+        let errors =@json($errors->all());
+        @if($errors->any())
+        console.log(errors);
+
+        let msg = '';
+        for (let i = 0; i < errors.length; i++) {
+            msg += (i + 1) + '-xatolik ' + errors[i] + '\n';
+        }
+        console.log(msg);
+        if (msg != '') {
+            swal({
+                icon: 'error',
+                title: 'Xatolik',
+                text: msg,
+                confirmButtonText: 'Continue',
+            })
+
+        }
+        @endif
+
+
+    </script>
 @endsection
 
