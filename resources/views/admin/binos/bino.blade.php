@@ -50,12 +50,12 @@
                                         </a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" id="delete">
+                                        <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm"
+                                                data-toggle="tooltip" title='Delete'>
                                             <span class="btn-label">
                                                 <i class="fa fa-trash"></i>
                                             </span>
                                         </button>
-
                                     </form>
                                 </td>
                             </tr>
@@ -65,15 +65,11 @@
                     </table>
                     <div class="container">
                         <div class="row justify-content-center">
-
-
                             @if ($data->links())
                                 <div class="mt-4 p-4 box has-text-centered">
                                     {{ $data->links() }}
                                 </div>
                             @endif
-
-
                         </div>
                     </div>
                 </div>
@@ -85,42 +81,22 @@
 
 @section('script')
     <script>
-        $(document).on('click', '#delete', function (e) {
-            e.preventDefault();
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: false
-            })
-
-            swalWithBootstrapButtons.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, delete it!',
-                cancelButtonText: 'No, cancel!',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    swalWithBootstrapButtons.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
-                } else if (
-                    /* Read more about handling dismissals below */
-                    result.dismiss === Swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons.fire(
-                        'Cancelled',
-                        'Your imaginary file is safe :)',
-                        'error'
-                    )
+        $('.show_confirm').click(function (event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Haqiqatan ham bu yozuvni oʻchirib tashlamoqchimisiz?`,
+                text: "Agar siz buni o'chirib tashlasangiz, u abadiy yo'qoladi.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                buttons: ['Yo`q', 'Ha']
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
                 }
-            })
-        })
+            });
+        });
     </script>
 @endsection
