@@ -85,6 +85,6 @@ class AttendanceController extends Controller
             $attendance['user_id'] = $id;
             $attendance->save();
         }
-        return redirect()->route('admin.attendances.index');
+        return redirect()->route('admin.attendances.index')->with('success', 'Davomat olindi');
     }
 }
