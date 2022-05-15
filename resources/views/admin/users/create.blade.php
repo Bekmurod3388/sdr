@@ -9,16 +9,7 @@
                 <hr>
                 <div class="card-body">
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <strong>!!!</strong> Qandaydir xatolik ro'y berdi.<br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+
 
 
                     <form action="{{route('admin.users.store')}}" method="POST" accept-charset="UTF-8">
@@ -57,16 +48,7 @@
 @endsection
 @section('script')
     <script>
-        // const togglePassword = document.querySelector('#togglePassword');
-        // const password = document.querySelector('#id_password');
-        //
-        // togglePassword.addEventListener('click', function (e) {
-        //     // toggle the type attribute
-        //     const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        //     password.setAttribute('type', type);
-        //     // toggle the eye slash icon
-        //     this.classList.toggle('fa-eye-slash');
-        // });
+
         function myFunction1() {
             var x = document.getElementById("myInput1");
             if (x.type === "password") {
@@ -81,6 +63,31 @@
                 x.type = "password";
             }
         }
+    </script>
+
+    <script>
+
+        let errors =@json($errors->all());
+        @if($errors->any())
+        console.log(errors);
+
+        let msg = '';
+        for (let i = 0; i < errors.length; i++) {
+            msg += (i + 1) + '-xatolik ' + errors[i] + '\n';
+        }
+        console.log(msg);
+        if (msg != '') {
+            swal({
+                icon: 'error',
+                title: 'Xatolik',
+                text: msg,
+                confirmButtonText: 'Continue',
+            })
+
+        }
+        @endif
+
+
     </script>
 
 @endsection
