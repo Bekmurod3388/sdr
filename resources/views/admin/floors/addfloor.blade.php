@@ -21,11 +21,12 @@
                     @endif
 
 
-                    <form action="{{route('admin.floors.store')}}" method="POST" accept-charset="UTF-8">
+                    <form action="{{route('admin.floors.store')}}" method="POST" accept-charset="UTF-8" id="myForm">
                         @csrf
                         <div class="form-group">
                             <label for="header_ru"> Binoni tanlang</label>
-                            <select class="form-control" name="bino_id">
+                            <select class="form-control" name="bino_id" id="building">
+                                <option value="none">Binoni tanlang</option>
                                 @foreach($buildings as $building)
                                 <option value="{{$building->id}}">{{$building->name}}</option>
                                 @endforeach
@@ -33,10 +34,10 @@
                         </div>
                         <div class="form-group">
                             <label for="header_ru"> Qavat raqami </label>
-                            <input type="text" name="floor" class="form-control"  placeholder="0-etaj">
+                            <input type="text" name="floor" class="form-control"  id="floor" placeholder="0-etaj">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Saqlash</button>
+                        <button type="submit" class="btn btn-primary" id="alert">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
 
                     </form>
@@ -47,4 +48,53 @@
 
 
 
+@endsection
+@section('script')
+    <script>
+        let facultets = @json($floors);
+        let floors = new Array();
+        $('#building').on('change', function () {
+            facultets = @json($floors);
+            floors = new Array();
+            var value = $(this).val();
+            for (let i = 0; i < facultets.length; i++) {
+                if (value == facultets[i].bino_id) {
+                    floors.push(facultets[i].id)
+                }
+            }
+        });
+
+        $(document).on('click', '#alert', function (e) {
+            e.preventDefault();
+            let cnt = 0;
+            // console.log(facultets);
+            alert(floors);
+            var value = $('#floor').val();
+            alert(value);
+            if (facultets.length == 0) $('#myForm').submit();
+            for (let i = 0; i < floors.length; i++) {
+                if (value == facultets[i].floor) {
+                    // alert(value);
+                    cnt++;
+                }
+            }
+            alert(cnt);
+            if (cnt > 0) {
+                swal({
+                    icon: 'error',
+                    title: 'Xatolik',
+                    text: 'Bu qavat oldin kiritilgan',
+                    confirmButtonText: 'Continue',
+                })
+                $('#floor').val('');
+            } else if ($('#floor').val() != '') {
+                swal({
+                    icon: 'success',
+                    text: 'Qavat yaratildi',
+                    confirmButtonText: 'Continue',
+                })
+                $('#myForm').submit();
+            } else $('#myForm').submit();
+        });
+    </script>
 @endsection

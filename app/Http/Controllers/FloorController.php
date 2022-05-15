@@ -16,50 +16,30 @@ class FloorController extends Controller
 
     public function index()
     {
-        $role = Auth::user()->role;
-        $id = Auth::user()->id;
-        $creater = Auth::user()->user_id;
-        $users = [];
-        if ($role == 'user') {
-            $data = Bino::where('user_id', $creater)->get();
-            if ($data != NULL)
-                foreach ($data as $value)
-                    array_push($users, $value['id']);
-//            dd($users);
-            $data = Floor::whereIn('bino_id', $users)->get();
-        } else if ($role == 'admin') {
-            $users_id = Floor::all();
-            $users_admin = User::where('user_id', $id)->get();
-            $users = [0];
-            $rooms = [];
-            array_push($users, $id);
-            if ($users_admin != NULL)
-                foreach ($users_admin as $key => $value)
-                    $users[$key] = $value['id'];
-
-            foreach ($users_id as $key => $value) {
-                for ($j = 0; $j < count($users); $j++) {
-                    $binos[$key] = $value->bino->user_id;
-                    if ($binos[$key] == $users[$j]) {
-                        array_push($rooms, $value);
-                        break;
-                    }
-                }
-            }
-            $data = (object)$rooms;
-        }
+        $id = $this->auth_id();
+        $buildings = [];
+        $data = Bino::where('user_id', $id)->get();
+        if ($data != NULL)
+            foreach ($data as $value)
+                array_push($buildings, $value['id']);
+        $data = Floor::whereIn('bino_id', $buildings)->paginate(5);
         return view('admin.floors.floor', ['data' => $data]);
     }
 
     public function create()
     {
-        $role = Auth::user()->role;
-        if ($role == 'admin')
-            $id = Auth::user()->id;
-        elseif ($role == 'user')
-            $id = Auth::user()->user_id;
+        $id = $this->auth_id();
         $buildings = Bino::where('user_id', $id)->get();
-        return view('admin.floors.addfloor', ['buildings' => $buildings]);
+        $floors = [];
+        if ($buildings != NULL)
+            foreach ($buildings as $value)
+                array_push($floors, $value['id']);
+        $floors = Floor::whereIn('bino_id', $floors)->get();
+//        dd($floors);
+        return view('admin.floors.addfloor', [
+            'buildings' => $buildings,
+            'floors' => $floors
+        ]);
     }
 
     public function store(FloorRequest $request)
@@ -70,10 +50,15 @@ class FloorController extends Controller
 
     public function edit($id)
     {
-
+        $auth_id = $this->auth_id();
+        $buildings = Bino::where('user_id', $auth_id)->get();
+        $floors = [];
+        if ($buildings != NULL)
+            foreach ($buildings as $value)
+                array_push($floors, $value['id']);
+        $floors = Floor::whereIn('bino_id', $floors)->get();
         $data = Floor::find($id);
-        return view('admin.floors.editfloor', compact('data'));
-
+        return view('admin.floors.editfloor', compact('data', 'floors'));
     }
 
 
@@ -97,6 +82,16 @@ class FloorController extends Controller
 
         return redirect(route('admin.floors.index'));
 
+    }
+
+    public function auth_id()
+    {
+        $role = Auth::user()->role;
+        if ($role == 'admin')
+            $id = Auth::user()->id;
+        elseif ($role == 'user')
+            $id = Auth::user()->user_id;
+        return $id;
     }
 
 

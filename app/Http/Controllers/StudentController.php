@@ -18,23 +18,14 @@ class StudentController
 
     public function index()
     {
-        $role = Auth::user()->role;
-        if ($role == 'admin')
-            $id = Auth::user()->id;
-        elseif ($role == 'user')
-            $id = Auth::user()->user_id;
+        $id = $this->auth_id();
         $post = Student::where('user_id', $id)->paginate(15);
-//        $post = Student::paginate(15);
         return view('admin.students.index', ["posts" => $post]);
     }
 
     public function create()
     {
-        $role = Auth::user()->role;
-        if ($role == 'admin')
-            $id = Auth::user()->id;
-        elseif ($role == 'user')
-            $id = Auth::user()->user_id;
+        $id = $this->auth_id();
         $floors = Floor::all();
         $buildings = Bino::where('user_id', $id)->get();
         $rooms = Room::whereColumn('busy', '<', 'count')->get();
@@ -50,11 +41,7 @@ class StudentController
 
     public function store(Request $request)
     {
-        $role = Auth::user()->role;
-        if ($role == 'admin')
-            $id = Auth::user()->id;
-        elseif ($role == 'user')
-            $id = Auth::user()->user_id;
+        $id = $this->auth_id();
         $request = $request->validate([
             "name" => 'required ',
             "surname" => 'required ',
@@ -172,6 +159,14 @@ class StudentController
 
         return redirect(route('admin.students.index'));
 
+    }
 
+    public function auth_id(){
+        $role = Auth::user()->role;
+        if ($role == 'admin')
+            $id = Auth::user()->id;
+        elseif ($role == 'user')
+            $id = Auth::user()->user_id;
+        return $id;
     }
 }

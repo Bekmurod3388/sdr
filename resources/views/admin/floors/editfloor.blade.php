@@ -20,7 +20,7 @@
                         </div>
                     @endif
 
-                    <form action="{{route('admin.floors.update',$data->id)}}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+                    <form action="{{route('admin.floors.update',$data->id)}}" method="POST" accept-charset="UTF-8" id="myForm">
                         @csrf
                         @method('PUT')
 
@@ -29,7 +29,7 @@
                             <input type="text" name="floor" class="form-control" id="header_ru"  value="{{$data->floor}}">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Saqlash</button>
+                        <button type="submit" class="btn btn-primary" id="alert">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
 
                     </form>
@@ -40,3 +40,37 @@
     </div>
 
 @endsection
+
+@section('script')
+    <script>
+        let facultets = @json($floors);
+        $(document).on('click', '#alert', function (e) {
+            e.preventDefault();
+            let cnt = 0;
+            var value = $('#header_ru').val();
+            if (facultets.length == 0) $('#myForm').submit();
+            for (let i = 0; i < facultets.length; i++) {
+                if (value == facultets[i].floor && value != @json($data->floor)) {
+                    cnt++;
+                }
+            }
+            if (cnt > 0) {
+                swal({
+                    icon: 'error',
+                    title: 'Xatolik',
+                    text: 'Bu qavat oldin kiritilgan',
+                    confirmButtonText: 'Continue',
+                })
+                $('#header_ru').val(@json($data->floor));
+            } else if ($('#header_ru').val() != '') {
+                swal({
+                    icon: 'success',
+                    text: 'Qavat o`zgartirildi',
+                    confirmButtonText: 'Continue',
+                })
+                $('#myForm').submit();
+            } else $('#myForm').submit();
+        });
+    </script>
+@endsection
+
