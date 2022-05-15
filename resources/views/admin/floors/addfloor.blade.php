@@ -67,18 +67,13 @@
         $(document).on('click', '#alert', function (e) {
             e.preventDefault();
             let cnt = 0;
-            // console.log(facultets);
-            alert(floors);
             var value = $('#floor').val();
-            alert(value);
             if (facultets.length == 0) $('#myForm').submit();
             for (let i = 0; i < floors.length; i++) {
                 if (value == facultets[i].floor) {
-                    // alert(value);
                     cnt++;
                 }
             }
-            alert(cnt);
             if (cnt > 0) {
                 swal({
                     icon: 'error',

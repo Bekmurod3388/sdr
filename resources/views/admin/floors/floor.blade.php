@@ -42,12 +42,12 @@
                                         </a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">
+                                        <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm"
+                                                data-toggle="tooltip" title='Delete'>
                                             <span class="btn-label">
                                                 <i class="fa fa-trash"></i>
                                             </span>
                                         </button>
-
                                     </form>
                                 </td>
                             </tr>
@@ -74,6 +74,29 @@
 
 
 
+@endsection
+
+
+@section('script')
+    <script>
+        $('.show_confirm').click(function (event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Haqiqatan ham bu yozuvni oʻchirib tashlamoqchimisiz?`,
+                text: "Agar siz buni o'chirib tashlasangiz, u abadiy yo'qoladi.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                buttons: ['Yo`q', 'Ha']
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 @endsection
 
 

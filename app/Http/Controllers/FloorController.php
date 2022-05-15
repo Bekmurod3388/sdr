@@ -48,16 +48,11 @@ class FloorController extends Controller
         return redirect(route('admin.floors.index'));
     }
 
-    public function edit($id)
+    public function edit(Floor $floor)
     {
         $auth_id = $this->auth_id();
-        $buildings = Bino::where('user_id', $auth_id)->get();
-        $floors = [];
-        if ($buildings != NULL)
-            foreach ($buildings as $value)
-                array_push($floors, $value['id']);
-        $floors = Floor::whereIn('bino_id', $floors)->get();
-        $data = Floor::find($id);
+        $floors = Floor::where('bino_id', $floor->bino_id)->get();
+        $data = Floor::find($floor->id);
         return view('admin.floors.editfloor', compact('data', 'floors'));
     }
 

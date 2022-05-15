@@ -44,6 +44,7 @@
 @section('script')
     <script>
         let facultets = @json($floors);
+        console.log(facultets);
         $(document).on('click', '#alert', function (e) {
             e.preventDefault();
             let cnt = 0;
