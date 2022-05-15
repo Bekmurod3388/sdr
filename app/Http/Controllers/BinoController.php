@@ -89,6 +89,19 @@ class BinoController extends Controller
     {
 
         $data = Bino::find($id);
+        $id = $data->id;
+        $floor_id = Floor::where('bino_id', $id)->get();
+        $floor_ids = [];
+        foreach ($floor_id as $value)
+            array_push($floor_ids, $value->id);
+
+        $rooms = Room::whereIn('floor_id', $floor_ids)->delete();
+        Floor::where('bino_id', $id)->delete();
+//        dd($floor_ids);
+//        dd($id);
+//        $floor_id = Floor::find($id)->id;
+//        $floors = Floor::where('bino_id', $id)->delete();
+//        $rooms = Room::where('floor_id', $floor_id)->delete();
         $data->delete();
 
         return redirect(route('admin.binos.index'));

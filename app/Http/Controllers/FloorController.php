@@ -52,6 +52,7 @@ class FloorController extends Controller
     {
         $auth_id = $this->auth_id();
         $floors = Floor::where('bino_id', $floor->bino_id)->get();
+//        dd($floors);
         $data = Floor::find($floor->id);
         return view('admin.floors.editfloor', compact('data', 'floors'));
     }
@@ -73,6 +74,8 @@ class FloorController extends Controller
     {
 
         $data = Floor::find($id);
+//        dd($id);
+        Room::where('floor_id', $id)->delete();
         $data->delete();
 
         return redirect(route('admin.floors.index'));
