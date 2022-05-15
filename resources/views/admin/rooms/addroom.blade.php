@@ -21,14 +21,12 @@
                     @endif
 
 
-                    <form action="{{route('admin.rooms.store')}}" method="POST" accept-charset="UTF-8"
-
-                          enctype="multipart/form-data">
+                    <form action="{{route('admin.rooms.store')}}" method="POST" accept-charset="UTF-8" id="myForm">
                         @csrf
 
                         <div class="form-group">
-                            <label for="header_ru"> Xona raqami </label>
-                            <input type="text" name="number" class="form-control"  placeholder="000-A">
+                            <label for="number"> Xona raqami </label>
+                            <input type="text" name="number" class="form-control"  placeholder="000-A" id="number">
                         </div>
 
 
@@ -81,6 +79,36 @@
                     $('#floor').append(option);
                 }
             }
+        });
+        let facultets = @json($rooms);
+        console.log(facultets);
+        $(document).on('click', '#alert', function (e) {
+            e.preventDefault();
+            let cnt = 0;
+            var value = $('#number').val();
+            var floor = $('#floor').val();
+            if (facultets.length == 0) $('#myForm').submit();
+            for (let i = 0; i < facultets.length; i++) {
+                if (value == facultets[i].room_number && floor == facultets[i].floor_id) {
+                    cnt++;
+                }
+            }
+            if (cnt > 0) {
+                swal({
+                    icon: 'error',
+                    title: 'Xatolik',
+                    text: 'Bu xona oldin kiritilgan',
+                    confirmButtonText: 'Continue',
+                })
+                $('#number').val('');
+            } else if ($('#number').val() != '') {
+                swal({
+                    icon: 'success',
+                    text: 'Xona yaratildi',
+                    confirmButtonText: 'Continue',
+                })
+                $('#myForm').submit();
+            } else $('#myForm').submit();
         });
     </script>
 @endsection

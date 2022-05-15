@@ -21,44 +21,28 @@ class RoomController extends Controller
 
     public function index()
     {
-        $role = Auth::user()->role;
-        $id = Auth::user()->id;
+        $id = $this->auth_id();
         $users = [];
-        $creater = Auth::user()->user_id;
-        if ($role == 'user') {
-            $data = Bino::where('user_id', $creater)->get();
-            if ($data != NULL)
-                foreach ($data as $value)
-                    array_push($users, $value['id']);
-            $data = Floor::whereIn('bino_id', $users)->get();
-            $users = [];
-            if ($data != NULL)
-                foreach ($data as $value)
-                    array_push($users, $value['id']);
-//            dd($data);
-            $data = Room::whereIn('floor_id', $users)->get();
-        } else
-            if ($role == 'admin') {
-                $users_id = Room::all();
-                $users_admin = User::where('user_id', $id)->get();
-                $users = [0];
-                $rooms = [];
-                array_push($users, $id);
-                if ($users_admin != NULL)
-                    foreach ($users_admin as $key => $value)
-                        $users[$key] = $value['id'];
+        $users_id = Room::all();
+        $users_admin = User::where('user_id', $id)->get();
+        $users = [0];
+        $rooms = [];
+        array_push($users, $id);
+        if ($users_admin != NULL)
+            foreach ($users_admin as $key => $value)
+                $users[$key] = $value['id'];
 
-                foreach ($users_id as $key => $value) {
-                    for ($j = 0; $j < count($users); $j++) {
-                        $binos[$key] = $value->floor->bino->user_id;
-                        if ($binos[$key] == $users[$j]) {
-                            array_push($rooms, $value);
-                            break;
-                        }
-                    }
+        foreach ($users_id as $key => $value) {
+            for ($j = 0; $j < count($users); $j++) {
+                if ($value->floor->bino->user_id == $users[$j]) {
+                    array_push($rooms, $value);
+                    break;
                 }
-                $data = (object)$rooms;
             }
+        }
+        $data = (object)$rooms;
+//        $data->paginate(5);
+//        dd($data);
         $floors = Floor::all();
 
         return view('admin.rooms.room', [
@@ -71,24 +55,22 @@ class RoomController extends Controller
 
     public function create()
     {
-        $role = Auth::user()->role;
-        if ($role == 'admin')
-            $id = Auth::user()->id;
-        elseif ($role == 'user')
-            $id = Auth::user()->user_id;
+        $id = $this->auth_id();
         $binos = Bino::where('user_id', $id)->get();
         $floors = Floor::all();
+        $rooms = Room::all();
+//        $data->find(1)->floor->bino;
+//        dd($rooms);
         return view('admin.rooms.addroom', [
             'floors' => $floors,
-            'binos' => $binos
+            'binos' => $binos,
+            'rooms' => $rooms,
         ]);
-
     }
 
 
     public function store(RoomRequest $request)
     {
-
         $data = new Room();
         $data->room_number = $request->number;
         $data->count = $request->count;
@@ -103,13 +85,17 @@ class RoomController extends Controller
     {
 
         $data = Room::find($id);
-        $isfloor = Floor::find($data->floor_id);
-        $floors = Floor::all();
+        $floor_id = Floor::find($data->floor_id)->id;
+        $rooms = Room::where('floor_id', $floor_id)->get();
+//        $isfloor = Floor::find($data->floor_id);
+//        $floors = Floor::all();
 
+//        dd($rooms);
         return view('admin.rooms.edit', [
             'data' => $data,
-            'isfloor' => $isfloor,
-            'floors' => $floors
+//            'isfloor' => $isfloor,
+//            'floors' => $floors,
+            'rooms' => $rooms,
         ]);
     }
 
@@ -118,9 +104,10 @@ class RoomController extends Controller
     {
 
         $data = Room::find($id);
+//        dd($data->floor_id);
         $data->room_number = $request->number;
         $data->count = $request->count;
-        $data->floor_id = $request->floor_id;
+        $data->floor_id = $data->floor_id;
         $data->save();
 
         return redirect(route('admin.rooms.index'));
@@ -138,4 +125,13 @@ class RoomController extends Controller
 
     }
 
+    public function auth_id()
+    {
+        $role = Auth::user()->role;
+        if ($role == 'admin')
+            $id = Auth::user()->id;
+        elseif ($role == 'user')
+            $id = Auth::user()->user_id;
+        return $id;
+    }
 }
