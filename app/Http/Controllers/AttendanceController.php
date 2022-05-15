@@ -58,6 +58,7 @@ class AttendanceController extends Controller
 
     public function store(AttendanceRequest $request)
     {
+
         $role = Auth::user()->role;
         if ($role == 'admin') abort(404);
         if ($role == 'admin')
@@ -67,8 +68,9 @@ class AttendanceController extends Controller
         $students = Student::where('room_id', $request->room)->get();
         $room_in_students = count($students);
         $students_request = $request->student;
-        $cnt = 0;
+
         for ($i = 0; $i < $room_in_students; $i++) {
+            $cnt = 0;
             $attendance = new Attendance();
             $attendance['student_id'] = $students[$i]['id'];
             if ($students_request != NULL)

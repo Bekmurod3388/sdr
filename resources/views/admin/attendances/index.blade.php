@@ -35,8 +35,8 @@
                             @if($attendance->check == 1)
                                 <tr>
                                     <th scope="row" class="col-1">{{ $key+1 }}</th>
-                                    <td>{{ $attendance->student->name }}</td>
-                                    <td>{{ $attendance->room->room_number }}</td>
+                                    <td>@if(isset($attendance->student->name)) {{$attendance->student->name}} @endif </td>
+                                    <td> @if(isset($attendance->room->room_number)) {{$attendance->room->room_number}} @endif </td>
                                     @if($attendance->check == 1)
                                         <td> Yo'q</td>
                                     @endif
