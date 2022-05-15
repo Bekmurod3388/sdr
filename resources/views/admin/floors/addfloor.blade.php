@@ -68,9 +68,11 @@
             e.preventDefault();
             let cnt = 0;
             var value = $('#floor').val();
+            var building = $('#building').val();
             if (facultets.length == 0) $('#myForm').submit();
             for (let i = 0; i < floors.length; i++) {
-                if (value == facultets[i].floor) {
+                if (value == facultets[i].floor && building == facultets[i].bino_id) {
+                    console.log(facultets[i].floor, ' ', facultets[i].bino_id);
                     cnt++;
                 }
             }

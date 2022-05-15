@@ -51,7 +51,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm"
-                                                data-toggle="tooltip" title='Delete'>
+                                                data-toggle="tooltip">
                                             <span class="btn-label">
                                                 <i class="fa fa-trash"></i>
                                             </span>

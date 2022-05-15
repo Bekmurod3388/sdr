@@ -23,9 +23,9 @@
                             <th scope="col">#</th>
                             <th scope="col">Xona raqami</th>
                             <th scope="col">Joylar soni</th>
+                            <th scope="col">Bino</th>
                             <th scope="col">Qavati</th>
                             <th scope="col">Ammallar</th>
-
                         </tr>
                         </thead>
                         <tbody>
@@ -37,8 +37,8 @@
                                         <th scope="row" class="col-1"> {{$ind+1}} </th>
                                         <td>{{$post->room_number}}</td>
                                         <td>{{$post->count}}</td>
+                                        <td>{{ $floor->bino['name'] }}</td>
                                         <td>{{$floor->floor}}</td>
-
                                         <td class="col-2">
                                             <form action="{{ route('admin.rooms.destroy',$post->id) }}" method="POST">
 
@@ -50,7 +50,8 @@
                                                 </a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm"
+                                                        data-toggle="tooltip">
                                                     <span class="btn-label">
                                                         <i class="fa fa-trash"></i>
                                                     </span>
@@ -67,15 +68,15 @@
                     </table>
                     <section class="content12 cid-t34gh8nW7r" id="content12-2s">
 
-{{--                        <div class="container">--}}
-{{--                            <div class="row justify-content-center">--}}
-{{--                                @if ($data->links())--}}
-{{--                                    <div class="mt-4 p-4 box has-text-centered">--}}
-{{--                                        {{ $data->links() }}--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="container">--}}
+                        {{--                            <div class="row justify-content-center">--}}
+                        {{--                                @if ($data->links())--}}
+                        {{--                                    <div class="mt-4 p-4 box has-text-centered">--}}
+                        {{--                                        {{ $data->links() }}--}}
+                        {{--                                    </div>--}}
+                        {{--                                @endif--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
                     </section>
                 </div>
             </div>
@@ -83,5 +84,28 @@
     </div>
 
 @endsection
+
+@section('script')
+    <script>
+        $('.show_confirm').click(function (event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Haqiqatan ham bu yozuvni oʻchirib tashlamoqchimisiz?`,
+                text: "Agar siz buni o'chirib tashlasangiz, u abadiy yo'qoladi.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                buttons: ['Yo`q', 'Ha']
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+@endsection
+
 
 
