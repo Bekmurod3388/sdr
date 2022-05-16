@@ -110,6 +110,9 @@ class RoomController extends Controller
         if($request->count<$busy){
             return Redirect::back()->withErrors("Bu xonada $busy ta ijarachi bor. O'rinlar soni $busy dan kam bo'lishi mumkin emas");
         }
+        if($request->count==0){
+            return Redirect::back()->withErrors("O'rinlar soni nol bo'lishi mumkin emas");
+        }
         $data->room_number = $request->number;
         $data->count = $request->count;
         $data->floor_id = $data->floor_id;
