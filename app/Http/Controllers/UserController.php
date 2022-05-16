@@ -65,6 +65,7 @@ class UserController extends Controller
         if ($role == 'admin') {
             $user->user_id = $id;
         }
+        $user->status=Auth::user()->status;
         $user->save();
 
         return redirect()->route('admin.users.index')
