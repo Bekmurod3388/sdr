@@ -56,8 +56,8 @@
                         </div>
                         <div class="form-group">
                             <label for="building">Bino</label>
-                            <select name="building" id="building" class="form-select form-control">
-                                <option value="none">Binoni tanlang</option>
+                            <select name="building" required id="building" class="form-select form-control">
+                                <option value="">Binoni tanlang</option>
                                 @foreach($buildings as $building)
                                     <option value="{{$building->id}}">{{$building->name}}</option>
                                 @endforeach
@@ -66,14 +66,14 @@
 
                         <div class="form-group">
                             <label for="floor">Qavat</label>
-                            <select name="floor" id="floor" class="form-select form-control">
-                                <option value="none">Qavatni tanlang</option>
+                            <select name="floor" id="floor" required class="form-select form-control">
+                                <option value="" selected >Qavatni tanlang</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <select id="room" name="room_id" required
                                     class="form-select form-control form-select-lg mb-3">
-                                <option value="none" selected>Xonani tanlang</option>
+                                <option value="" selected>Xonani tanlang</option>
 
                             </select>
                         </div>
@@ -107,7 +107,7 @@
         $('#building').on('change', function () {
             var value = $(this).val();
             $('#floor').empty();
-            $('#floor').append("<option value='none'>Qavatni tanlang</option>")
+            $('#floor').append("<option value=''>Qavatni tanlang</option>")
             for (let i = 0; i < floors.length; i++) {
                 if (value == floors[i].bino_id) {
                     var option = document.createElement("option");   // Create with DOM
@@ -120,7 +120,7 @@
         $('#floor').on('change', function () {
             var room_id = $(this).val();
             $('#room').empty();
-            $('#room').append("<option value='none'>Xonani tanlang</option>")
+            $('#room').append("<option value=''>Xonani tanlang</option>")
             for (let i = 0; i < rooms.length; i++) {
                 if (room_id == rooms[i].floor_id) {
                     var option = document.createElement("option");   // Create with DOM
