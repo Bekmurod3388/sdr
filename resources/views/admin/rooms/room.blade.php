@@ -50,7 +50,8 @@
                                                 </a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger btn-flat show_confirm"
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-danger btn-flat show_confirm"
                                                         data-toggle="tooltip">
                                                     <span class="btn-label">
                                                         <i class="fa fa-trash"></i>
@@ -68,15 +69,15 @@
                     </table>
                     <section class="content12 cid-t34gh8nW7r" id="content12-2s">
 
-{{--                        <div class="container">--}}
-{{--                            <div class="row justify-content-center">--}}
-{{--                                @if ($data->links())--}}
-{{--                                    <div class="mt-4 p-4 box has-text-centered">--}}
-{{--                                        {{ $data->links() }}--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="container">--}}
+                        {{--                            <div class="row justify-content-center">--}}
+                        {{--                                @if ($data->links())--}}
+                        {{--                                    <div class="mt-4 p-4 box has-text-centered">--}}
+                        {{--                                        {{ $data->links() }}--}}
+                        {{--                                    </div>--}}
+                        {{--                                @endif--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
 
                     </section>
                 </div>
