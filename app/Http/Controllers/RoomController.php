@@ -9,6 +9,7 @@ use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use function Sodium\increment;
 
 class RoomController extends Controller
@@ -105,6 +106,10 @@ class RoomController extends Controller
 
         $data = Room::find($id);
 //        dd($data->floor_id);
+        $busy=$data->busy;
+        if($request->count<$busy){
+            return Redirect::back()->withErrors("Bu xonada $busy ta ijarachi bor. O'rinlar soni $busy dan kam bo'lishi mumkin emas");
+        }
         $data->room_number = $request->number;
         $data->count = $request->count;
         $data->floor_id = $data->floor_id;
@@ -121,7 +126,7 @@ class RoomController extends Controller
         $data = Room::find($id);
         $data->delete();
 
-        return redirect(route('admin.rooms.index'))->with('success', 'Xona yaratildi.');
+        return redirect(route('admin.rooms.index'))->with('success', 'Xona o\'chirildi.');
 
     }
 
