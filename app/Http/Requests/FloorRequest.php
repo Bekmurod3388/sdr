@@ -25,6 +25,7 @@ class FloorRequest extends FormRequest
     {
         return [
             'floor' => 'required',
+            'bino_id' => 'required | not_in:0'
         ];
     }
 }

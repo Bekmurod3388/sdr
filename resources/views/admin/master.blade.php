@@ -68,7 +68,7 @@
         <div class="content">
 
             <div class="page-inner py-5">
-                @include('alerts')
+{{--                @include('alerts')--}}
                 @yield('content')
 
             </div>

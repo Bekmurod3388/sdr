@@ -9,16 +9,16 @@
                 <hr>
                 <div class="card-body">
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <strong>Whoops! </strong> <br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+{{--                    @if ($errors->any())--}}
+{{--                        <div class="alert alert-danger">--}}
+{{--                            <strong>Whoops! </strong> <br><br>--}}
+{{--                            <ul>--}}
+{{--                                @foreach ($errors->all() as $error)--}}
+{{--                                    <li>{{ $error }}</li>--}}
+{{--                                @endforeach--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
 
 
                     <form action="{{route('admin.floors.store')}}" method="POST" accept-charset="UTF-8" id="myForm">
@@ -26,7 +26,7 @@
                         <div class="form-group">
                             <label for="header_ru"> Binoni tanlang</label>
                             <select class="form-control" name="bino_id" id="building">
-                                <option value="none">Binoni tanlang</option>
+                                <option value="0">Binoni tanlang</option>
                                 @foreach($buildings as $building)
                                 <option value="{{$building->id}}">{{$building->name}}</option>
                                 @endforeach
@@ -62,6 +62,7 @@
                     floors.push(facultets[i].id)
                 }
             }
+            // alert(floors);
         });
 
         $(document).on('click', '#alert', function (e) {
@@ -70,9 +71,8 @@
             var value = $('#floor').val();
             var building = $('#building').val();
             if (facultets.length == 0) $('#myForm').submit();
-            for (let i = 0; i < floors.length; i++) {
+            for (let i = 0; i < facultets.length; i++) {
                 if (value == facultets[i].floor && building == facultets[i].bino_id) {
-                    console.log(facultets[i].floor, ' ', facultets[i].bino_id);
                     cnt++;
                 }
             }
@@ -84,7 +84,7 @@
                     confirmButtonText: 'Continue',
                 })
                 $('#floor').val('');
-            } else if ($('#floor').val() != '') {
+            } else if ($('#floor').val() != '' && $('#building').val() != '0') {
                 swal({
                     icon: 'success',
                     text: 'Qavat yaratildi',
@@ -93,5 +93,28 @@
                 $('#myForm').submit();
             } else $('#myForm').submit();
         });
+    </script>
+    <script>
+
+        let errors = @json($errors->all());
+        @if($errors->any())
+        console.log(errors);
+
+        let msg = '';
+        for (let i = 0; i < errors.length; i++) {
+            msg += (i + 1) + '-xatolik ' + errors[i] + '\n';
+        }
+        console.log(msg);
+        if (msg != '') {
+            swal({
+                icon: 'error',
+                title: 'Xatolik',
+                text: msg,
+                confirmButtonText: 'Continue',
+            })
+        }
+        @endif
+
+
     </script>
 @endsection

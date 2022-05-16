@@ -9,16 +9,16 @@
                 <hr>
                 <div class="card-body">
 
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> <br><br>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+{{--                    @if ($errors->any())--}}
+{{--                        <div class="alert alert-danger">--}}
+{{--                            <strong>Whoops!</strong> <br><br>--}}
+{{--                            <ul>--}}
+{{--                                @foreach ($errors->all() as $error)--}}
+{{--                                    <li>{{ $error }}</li>--}}
+{{--                                @endforeach--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
 
 
                     <form action="{{route('admin.rooms.store')}}" method="POST" accept-charset="UTF-8" id="myForm">
@@ -101,7 +101,7 @@
                     confirmButtonText: 'Continue',
                 })
                 $('#number').val('');
-            } else if ($('#number').val() != '') {
+            } else if ($('#number').val() != '' && $('#floor').val() != '0') {
                 swal({
                     icon: 'success',
                     text: 'Xona yaratildi',
@@ -110,5 +110,29 @@
                 $('#myForm').submit();
             } else $('#myForm').submit();
         });
+    </script>
+    <script>
+
+        let errors = @json($errors->all());
+        @if($errors->any())
+        console.log(errors);
+
+        let msg = '';
+        for (let i = 0; i < errors.length; i++) {
+            msg += (i + 1) + '-xatolik ' + errors[i] + '\n';
+        }
+        console.log(msg);
+        if (msg != '') {
+            swal({
+                icon: 'error',
+                title: 'Xatolik',
+                text: msg,
+                confirmButtonText: 'Continue',
+            })
+        }
+{{--        @empty($errors)--}}
+        @endif
+
+
     </script>
 @endsection

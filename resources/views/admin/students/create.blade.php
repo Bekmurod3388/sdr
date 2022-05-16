@@ -134,7 +134,7 @@
     </script>
     <script>
 
-        let errors =@json($errors->all());
+        let errors = @json($errors->all());
         @if($errors->any())
         console.log(errors);
 
@@ -150,7 +150,6 @@
                 text: msg,
                 confirmButtonText: 'Continue',
             })
-
         }
         @endif
 
