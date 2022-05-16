@@ -37,7 +37,7 @@
 
                         <div class="form-group">
                             <select name="floor_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example" id="building">
-                                <option value="0" selected>Binoni tanlang</option>
+                                <option value="" selected>Binoni tanlang</option>
                                 @foreach($binos as $bino)
                                     <option value="{{$bino->id}}">{{$bino->name}}</option>
                                 @endforeach
@@ -46,7 +46,7 @@
 
                         <div class="form-group">
                             <select name="floor_id" required class="form-select form-control form-select-lg mb-3" aria-label=".form-select-lg example" id="floor">
-                                <option value="0" selected>Qavatni tanlang</option>
+                                <option value="" selected>Qavatni tanlang</option>
 
                             </select>
                         </div>
@@ -112,6 +112,21 @@
 
         let msg = '';
         for (let i = 0; i < errors.length; i++) {
+            if(errors[i]=="Bu floor id yaroqsiz"){
+                errors[i]="Qavat tanlanmadi";
+            }
+            if(errors[i]==" number maydoni to'ldirilishi shart"){
+                errors[i]="Xona nomi kiritilishi shart";
+            }
+            if(errors[i]==" count maydoni to'ldirilishi shart"){
+                errors[i]="O'rinlar soni kiritilishi shart";
+            }
+            if(errors[i]=="Bu count yaroqsiz"){
+                errors[i]="O'rinlar soni noldan katta bo'lishi shart";
+            }
+            if(errors[i]==" floor id maydoni to'ldirilishi shart"){
+                errors[i]="Qavat tanlanmadi";
+            }
             msg += (i + 1) + '-xatolik ' + errors[i] + '\n';
         }
         console.log(msg);
