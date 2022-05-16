@@ -55,7 +55,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button title="O'chirish" type="submit"
-                                                class="btn btn-danger active btn-sm"><span class="btn-label">
+                                                class="btn btn-danger active btn-sm show_confirm"><span class="btn-label">
                                         <i class="fa fa-trash"></i>
                                     </span></button>
                                     </form>
@@ -94,4 +94,24 @@
             })
         </script>
     @endif
+    <script>
+        $('.show_confirm').click(function (event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Haqiqatan ham bu yozuvni oʻchirib tashlamoqchimisiz?`,
+                text: "Agar siz buni o'chirib tashlasangiz, u abadiy yo'qoladi.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                buttons: ['Yo`q', 'Ha']
+            }).then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+
 @endsection
