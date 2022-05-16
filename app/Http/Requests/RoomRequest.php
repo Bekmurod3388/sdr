@@ -25,6 +25,8 @@ class RoomRequest extends FormRequest
     {
         return [
             'number' => 'required',
+            'count' => 'required |  not_in : 0',
+            'floor_id'=>'required | not_in : 0'
         ];
     }
 }
