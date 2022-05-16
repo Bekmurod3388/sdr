@@ -48,7 +48,7 @@ class StudentController
             "f_s_name" => 'required ',
             "address" => 'required ',
             "phone" => ['required', new PhoneNumber],
-            "passport" => ['required', new PassportNumber],
+            "passport" => ['required','unique:students', new PassportNumber],
             "parent_name" => 'required ',
             "parent_phone" => ['required', new PhoneNumber],
             "room_id" => 'required',
