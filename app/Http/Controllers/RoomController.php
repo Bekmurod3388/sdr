@@ -121,7 +121,7 @@ class RoomController extends Controller
         $data = Room::find($id);
         $data->delete();
 
-        return redirect(route('admin.rooms.index'));
+        return redirect(route('admin.rooms.index'))->with('success', 'Xona yaratildi.');
 
     }
 

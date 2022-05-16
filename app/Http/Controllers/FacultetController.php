@@ -113,6 +113,6 @@ class FacultetController extends Controller
     {
         $data=Fakultet::find($id);
         $data->delete();
-        return redirect(route('admin.facultets.index'));
+        return redirect(route('admin.facultets.index'))->with('success', 'Fakultet yaratildi.');
     }
 }

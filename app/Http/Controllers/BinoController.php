@@ -104,7 +104,7 @@ class BinoController extends Controller
 //        $rooms = Room::where('floor_id', $floor_id)->delete();
         $data->delete();
 
-        return redirect(route('admin.binos.index'));
+        return redirect(route('admin.binos.index'))->with('success', 'Bino yaratildi.');
 
     }
 

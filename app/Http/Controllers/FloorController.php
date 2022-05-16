@@ -78,7 +78,7 @@ class FloorController extends Controller
         Room::where('floor_id', $id)->delete();
         $data->delete();
 
-        return redirect(route('admin.floors.index'));
+        return redirect(route('admin.floors.index'))->with('success', 'Qavat yaratildi.');
 
     }
 
