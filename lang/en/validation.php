@@ -97,8 +97,8 @@ return [
         'string' => 'Parol uzunligi :min belgidan kam bo\'lmasligi kerak  ',
     ],
     'multiple_of' => 'The :attribute must be a multiple of :value.',
-    'not_in' => 'The selected :attribute is invalid.',
-    'not_regex' => 'The :attribute format haqiqiy emas.',
+    'not_in' => 'Bu :attribute yaroqsiz',
+    'not_regex' => 'The :attribute format ',
     'numeric' => 'Faqat raqamlardan iborat bo\'lishi kerak',
     'password' => [
         'letters' => 'The :attribute must contain at least one letter.',
