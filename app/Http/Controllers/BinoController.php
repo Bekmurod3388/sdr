@@ -51,7 +51,7 @@ class BinoController extends Controller
         $data->user_id = $id;
         $data->save();
 
-        return redirect(route('admin.binos.index'));
+        return redirect(route('admin.binos.index'))->with('success', 'Bino yaratildi.');
     }
 
     public function edit($id)
@@ -80,7 +80,7 @@ class BinoController extends Controller
         $data->name = $request->name;
         $data->save();
 
-        return redirect(route('admin.binos.index'));
+        return redirect(route('admin.binos.index'))->with('success', 'Bino yaratildi.');
 
 
     }

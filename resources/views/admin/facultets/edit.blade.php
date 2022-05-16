@@ -61,13 +61,6 @@
                     confirmButtonText: 'Continue',
                 })
                 $('#header_ru').val(@json($post->name));
-            } else if ($('#header_ru').val() != '') {
-                swal({
-                    icon: 'success',
-                    text: 'Fakultet o`zgartirildi',
-                    confirmButtonText: 'Continue',
-                })
-                $('#myForm').submit();
             } else $('#myForm').submit();
         });
     </script>

@@ -45,7 +45,7 @@ class FloorController extends Controller
     public function store(FloorRequest $request)
     {
         Floor::create($request->all());
-        return redirect(route('admin.floors.index'));
+        return redirect(route('admin.floors.index'))->with('success', 'Qavat yaratildi.');
     }
 
     public function edit(Floor $floor)
@@ -65,7 +65,7 @@ class FloorController extends Controller
         $data->floor = $request->floor;
         $data->save();
 
-        return redirect(route('admin.floors.index'));
+        return redirect(route('admin.floors.index'))->with('success', 'Qavat yaratildi.');
 
 
     }

@@ -101,13 +101,6 @@
                     confirmButtonText: 'Continue',
                 })
                 $('#number').val('');
-            } else if ($('#number').val() != '' && $('#floor').val() != '0') {
-                swal({
-                    icon: 'success',
-                    text: 'Xona yaratildi',
-                    confirmButtonText: 'Continue',
-                })
-                $('#myForm').submit();
             } else $('#myForm').submit();
         });
     </script>

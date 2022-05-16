@@ -62,14 +62,8 @@
                     confirmButtonText: 'Continue',
                 })
                 $('#bino').val('');
-            } else if ($('#bino').val() != '') {
-                swal({
-                    icon: 'success',
-                    text: 'Bino yaratildi',
-                    confirmButtonText: 'Continue',
-                })
+            } else
                 $('#myForm').submit();
-            } else $('#myForm').submit();
         });
     </script>
     <script>

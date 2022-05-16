@@ -63,14 +63,7 @@
                     confirmButtonText: 'Continue',
                 })
                 $('#header_ru').val(@json($data->floor));
-            } else if ($('#header_ru').val() != '') {
-                swal({
-                    icon: 'success',
-                    text: 'Qavat o`zgartirildi',
-                    confirmButtonText: 'Continue',
-                })
-                $('#myForm').submit();
-            } else $('#myForm').submit();
+            } else  $('#myForm').submit();
         });
     </script>
 @endsection

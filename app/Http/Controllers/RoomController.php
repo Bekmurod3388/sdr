@@ -77,7 +77,7 @@ class RoomController extends Controller
         $data->floor_id = $request->floor_id;
         $data->save();
 
-        return redirect(route('admin.rooms.index'));
+        return redirect(route('admin.rooms.index'))->with('success', 'Xona yaratildi.');
     }
 
 
@@ -110,7 +110,7 @@ class RoomController extends Controller
         $data->floor_id = $data->floor_id;
         $data->save();
 
-        return redirect(route('admin.rooms.index'));
+        return redirect(route('admin.rooms.index'))->with('success', 'Xona yaratildi.');
 
 
     }

@@ -64,14 +64,7 @@
                     confirmButtonText: 'Continue',
                 })
                 $('#header_ru').val(@json($data->name));
-            } else if ($('#header_ru').val() != '') {
-                swal({
-                    icon: 'success',
-                    text: 'Bino o`zgartirildi',
-                    confirmButtonText: 'Continue',
-                })
-                $('#myForm').submit();
-            } else $('#myForm').submit();
+            } else  $('#myForm').submit();
         });
     </script>
 @endsection

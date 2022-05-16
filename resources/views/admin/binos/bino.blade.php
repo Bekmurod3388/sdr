@@ -80,6 +80,16 @@
 @endsection
 
 @section('script')
+    @if(session('success'))
+
+        <script>
+            swal({
+                icon: 'success',
+                text: 'Muvaffaqqiyatli bajarildi',
+                confirmButtonText: 'Continue',
+            })
+        </script>
+    @endif
     <script>
         $('.show_confirm').click(function (event) {
             var form = $(this).closest("form");
@@ -100,3 +110,4 @@
         });
     </script>
 @endsection
+

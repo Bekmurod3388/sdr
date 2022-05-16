@@ -78,14 +78,7 @@
                     confirmButtonText: 'Continue',
                 })
                 $('#header_ru').val(@json($data->room_number));
-            } else if ($('#header_ru').val() != '') {
-                swal({
-                    icon: 'success',
-                    text: 'Xona o`zgartirildi',
-                    confirmButtonText: 'Continue',
-                })
-                $('#myForm').submit();
-            } else $('#myForm').submit();
+            } else  $('#myForm').submit();
         });
     </script>
 @endsection

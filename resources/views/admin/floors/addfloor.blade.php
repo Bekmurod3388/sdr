@@ -84,14 +84,7 @@
                     confirmButtonText: 'Continue',
                 })
                 $('#floor').val('');
-            } else if ($('#floor').val() != '' && $('#building').val() != '0') {
-                swal({
-                    icon: 'success',
-                    text: 'Qavat yaratildi',
-                    confirmButtonText: 'Continue',
-                })
-                $('#myForm').submit();
-            } else $('#myForm').submit();
+            } else  $('#myForm').submit();
         });
     </script>
     <script>

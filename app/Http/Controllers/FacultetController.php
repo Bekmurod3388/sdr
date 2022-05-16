@@ -56,7 +56,7 @@ class FacultetController extends Controller
         $data->name=$request->name;
         $data->user_id=$id;
         $data->save();
-        return redirect(route('admin.facultets.index'));
+        return redirect(route('admin.facultets.index'))->with('success', 'Fakultet yaratildi.');
     }
 
     /**
@@ -100,7 +100,7 @@ class FacultetController extends Controller
         $post->id=$id;
         $post->name=$request->name;
         $post->save();
-        return redirect()->route('admin.facultets.index');
+        return redirect()->route('admin.facultets.index')->with('success', 'Fakultet yaratildi.');
     }
 
     /**

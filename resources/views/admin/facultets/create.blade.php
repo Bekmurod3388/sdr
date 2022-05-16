@@ -61,14 +61,8 @@
                     confirmButtonText: 'Continue',
                 })
                 $('#header_ru').val('');
-            } else if ($('#header_ru').val() != '') {
-                swal({
-                    icon: 'success',
-                    text: 'Fakultet yaratildi',
-                    confirmButtonText: 'Continue',
-                })
+            } else
                 $('#myForm').submit();
-            } else $('#myForm').submit();
         });
     </script>
     <script>
