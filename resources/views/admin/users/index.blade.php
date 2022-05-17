@@ -13,7 +13,7 @@
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
-                                Qo'shish
+                                Foydalanuvchi qo'shing
                             </a>
                         @endif
                     </div>

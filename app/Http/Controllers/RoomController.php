@@ -6,6 +6,7 @@ use App\Http\Requests\RoomRequest;
 use App\Models\Bino;
 use App\Models\Floor;
 use App\Models\Room;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +53,16 @@ class RoomController extends Controller
         ]);
 
     }
-
+    public function show($id){
+        $data = Room::find($id);
+        $students=Student::all()->where('room_id',$id);
+        return view('admin.rooms.show',
+        [
+            "students"=>$students,
+            "data"=>$data
+        ]
+        );
+    }
 
     public function create()
     {
