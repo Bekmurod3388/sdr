@@ -38,7 +38,6 @@ class StudentController
             'floors' => $floors,
         ]);
     }
-
     public function store(Request $request)
     {
         $id = $this->auth_id();

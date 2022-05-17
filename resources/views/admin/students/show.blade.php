@@ -4,6 +4,7 @@
         <div class="card">
             <div class="card-header">
                 <a href="{{route('admin.students.index')}}" class="btn btn-primary">Talabalar ro'yhatiga qaytish</a>
+                <a href="{{route('admin.replace.edit',$data->id)}}" class="btn btn-primary float-end">Talaba joylashgan xonani o'zgartirish</a>
                 <div class="row container mt-4">
                     <table class=" table table-bordered border-primary ">
                         <tr>
