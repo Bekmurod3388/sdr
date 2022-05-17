@@ -23,7 +23,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Xona raqami</th>
                             <th scope="col">Joylar soni</th>
-                            <th scope="col">Band qilingan</th>
+                            <th scope="col">Bandlik xolati</th>
                             <th scope="col">Bino</th>
                             <th scope="col">Qavati</th>
                             <th scope="col" class="w-25">Ammallar</th>
@@ -38,7 +38,14 @@
                                         <th scope="row" class="col-1"> {{$ind+1}} </th>
                                         <td>{{$post->room_number}}</td>
                                         <td>{{$post->count}}</td>
-                                        <td>{{$post->busy}}</td>
+                                        <td>
+                                            @if($post->busy<$post->count)
+                                                <p class="text-success disabled">{{$post->busy}} ta joy band</p>
+
+                                            @else
+                                                <p class="text-secondary disabled">Barcha joylar band</p>
+                                            @endif
+                                        </td>
                                         <td>{{ $floor->bino['name'] }}</td>
                                         <td>{{$floor->floor}}</td>
                                         <td class="col-2">
