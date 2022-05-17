@@ -42,14 +42,28 @@ class RoomController extends Controller
                 }
             }
         }
+
+
+        $students=[];
+        foreach ($rooms as $room){
+
+            $id=$room['id'];
+
+            $st=Student::all()->where('room_id',$id);
+            $n=count($st);
+            $students["$id"]=$st;
+        }
+
+
         $data = (object)$rooms;
 //        $data->paginate(5);
-//        dd($data);
+
         $floors = Floor::all();
 
         return view('admin.rooms.room', [
             'data' => $data,
-            'floors' => $floors
+            'floors' => $floors,
+            "students"=>$students
         ]);
 
     }
