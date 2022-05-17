@@ -62,6 +62,14 @@ class ReplaceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function auth_id(){
+        $role = Auth::user()->role;
+        if ($role == 'admin')
+            $id = Auth::user()->id;
+        elseif ($role == 'user')
+            $id = Auth::user()->user_id;
+        return $id;
+    }
     public function edit($id)
     {
         $data = Student::find($id);
@@ -69,7 +77,7 @@ class ReplaceController extends Controller
         $fak_old = Fakultet::find($data->fak_id);
 
 
-        $id = Auth::id();
+        $id = $this->auth_id();
 
         $users_id = Room::whereColumn('busy', '<', 'count')->get();
         $users_admin = User::where('user_id', $id)->get();

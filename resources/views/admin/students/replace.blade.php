@@ -11,7 +11,7 @@
                             <span class="btn-label">
                                 <i class="fas fa-arrow-left"></i>
                             </span>
-                            biror joyga o'tish
+                            Xonalar ro'yhatiga qaytish
                         </a>
                     </div>
                 </div>
