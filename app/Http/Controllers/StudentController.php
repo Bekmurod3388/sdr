@@ -7,6 +7,7 @@ use App\Models\Fakultet;
 use App\Models\Floor;
 use App\Models\Room;
 use App\Models\Student;
+use App\Models\User;
 use App\Rules\PassportNumber;
 use App\Rules\PhoneNumber;
 use Illuminate\Http\Request;
@@ -28,7 +29,31 @@ class StudentController
         $id = $this->auth_id();
         $floors = Floor::all();
         $buildings = Bino::where('user_id', $id)->get();
-        $rooms = Room::whereColumn('busy', '<', 'count')->get();
+
+        $users_id = Room::whereColumn('busy', '<', 'count')->get();
+        $users_admin = User::where('user_id', $id)->get();
+        $users = [0];
+        $rooms = [];
+        array_push($users, $id);
+        if ($users_admin != NULL)
+            foreach ($users_admin as $key => $value)
+                $users[$key] = $value['id'];
+
+        foreach ($users_id as $key => $value) {
+            for ($j = 0; $j < count($users); $j++) {
+                if ($value->floor->bino->user_id == $users[$j]) {
+                    array_push($rooms, $value);
+                    break;
+                }
+            }
+        }
+
+
+//        $rooms = (object)$rooms;
+
+//        dd($rooms);
+
+//        $rooms = Room::whereColumn('busy', '<', 'count')->get();
         $fak = Fakultet::where('user_id', $id)->get();
 
         return view('admin.students.create', [
