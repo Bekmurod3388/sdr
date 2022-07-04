@@ -84,10 +84,8 @@
                                 @foreach($fakultets as $fak)
                                     <option value="{{$fak->id}}">{{$fak->name}}</option>
                                 @endforeach
-
                             </select>
                         </div>
-
 
                         <button type="submit" id="alert" class="btn btn-primary">Saqlash</button>
                         <input type="reset" class="btn btn-danger" value="Tozalash">
