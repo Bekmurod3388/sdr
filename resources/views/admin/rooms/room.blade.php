@@ -45,7 +45,7 @@
                                                 <a title="Ko'rish"  href="{{route('admin.students.show',$student->id)}}">
                                                     {{$student->surname}}
                                                     {{$student->name}}
-                                                </a>
+                                                </a> <br>
                                             @endforeach
 
 

@@ -32,17 +32,19 @@
                         </thead>
                         <tbody>
                         @foreach($attendances as $key => $attendance)
-                            @if($attendance->check == 1)
+{{--                            @if($attendance->check == 1)--}}
                                 <tr>
                                     <th scope="row" class="col-1">{{ $key+1 }}</th>
                                     <td>@if(isset($attendance->student->name)) {{$attendance->student->name}} @endif </td>
                                     <td> @if(isset($attendance->room->room_number)) {{$attendance->room->room_number}} @endif </td>
                                     @if($attendance->check == 1)
                                         <td> Yo'q</td>
+                                        @else
+                                        <td> Mavjud </td>
                                     @endif
                                     <td>{{ $attendance->created_at }}</td>
                                 </tr>
-                            @endif
+{{--                            @endif--}}
                         @endforeach
                         </tbody>
                     </table>
